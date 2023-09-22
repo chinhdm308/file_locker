@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+
+    <!-- button -->
+    <color name="clear_button_text_color">#2196F3</color>
+    <color name="stage_button_text_color">@color/white</color>
+
+    <!-- textView -->
+    <color name="message_text_default_color">#484848</color>
+    <color name="message_text_error_color">#d32f2f</color>
+    <color name="title_text_color">@color/black</color>
+    <color name="sub_title_text_color">@color/black</color>
+
+    <!-- black -->
+    <color name="md_black_0">#de000000</color> <!-- alpha 87% -->
+    <color name="md_black_1">#8a000000</color> <!-- alpha 54% -->
+    <color name="md_black_2">#42000000</color> <!-- alpha 26% -->
+    <color name="md_black_3">#1f000000</color> <!-- alpha 12% -->
+    <!-- white -->
+    <color name="md_white_0">#ffffffff</color> <!-- alpha 100% -->
+    <color name="md_white_1">#b3ffffff</color> <!-- alpha 70% -->
+    <color name="md_white_2">#4dffffff</color> <!-- alpha 30% -->
+    <color name="md_white_3">#1fffffff</color> <!-- alpha 12% -->
+
+    <color name="ripple_water">#ffeeeeee</color>
+
+    <color name="lock_bg_white">#fffafafa</color>
+
+    <color name="lock_bg_blue">#ff3f51b5</color>
+
+    <color name="file_add">#ff4081</color>
+
+    <color name="file_check">#ff4081</color>
+
+    <color name="text_color_white">#ffffffff</color>
+
+    <color name="color_toolbar_hide_file">#6750A3</color>
+</resources>

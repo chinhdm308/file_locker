@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.base.basemvvmcleanarchitecture.widget.SquareLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/squareLayoutItem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:layout_marginEnd="@dimen/_4sdp"
+        android:layout_marginBottom="@dimen/_4sdp"
+        android:background="@android:color/darker_gray"
+        android:elevation="@dimen/_5sdp"
+        android:scaleType="centerCrop" />
+</com.base.basemvvmcleanarchitecture.widget.SquareLayout>
+

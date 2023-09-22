@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/_10sdp">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_15ssp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Camouflage Icon" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textTitle"
+        tools:itemCount="3"
+        tools:listitem="@layout/item_camouflage_icon" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:background="?attr/selectableItemBackground"
+        android:padding="@dimen/_7sdp"
+        android:text="Cancel"
+        android:textSize="@dimen/_13ssp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recycleView" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textOK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:background="?attr/selectableItemBackground"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:paddingVertical="@dimen/_7sdp"
+        android:text="OK"
+        android:textSize="@dimen/_13ssp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recycleView" />
+</androidx.constraintlayout.widget.ConstraintLayout>

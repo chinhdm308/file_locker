@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="?attr/colorControlHighlight">
+
+    <!-- ripple mask -->
+    <item android:id="@+id/mask">
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/white" />
+            <corners android:radius="@dimen/_30sdp" />
+        </shape>
+    </item>
+
+    <!-- background shape or color -->
+    <item android:drawable="@drawable/bg_permission_button" />
+
+</ripple>

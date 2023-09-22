@@ -1,0 +1,132 @@
+<resources>
+    <string name="app_name">File Locker</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="alert_title_error_unknown">Error</string>
+    <string name="alert_message_error_unknown">It could not be processed normally. Please try again.</string>
+
+    <!-- textView -->
+    <string name="title">Set Screen Lock</string>
+    <string name="sub_title">For security, set pattern</string>
+    <string name="initial_message_first_stage">Draw an unlock pattern</string>
+    <string name="initial_message_second_stage">"Draw pattern again to confirm"</string>
+    <string name="started_message">Release finger when done</string>
+    <string name="success_message_first_stage">Pattern recorded</string>
+    <string name="success_message_second_stage">Your new unlock pattern</string>
+    <string name="error_message_first_stage">Connect at least 4 dots. Try again.</string>
+    <string name="error_message_second_stage">Wrong pattern</string>
+    <!--    <string name="error_message_second_stage">Pattern does not match. Redraw.</string>-->
+
+    <!-- dialog -->
+    <string name="alert_dialog_confirm_message">Congratulations! Your new unlock pattern is created.</string>
+    <string name="alert_dialog_positive_button">Okay!</string>
+
+    <string name="draw_pattern_title">Create a new pattern</string>
+    <string name="redraw_pattern_title">Redraw to complete</string>
+
+    <string name="recreate_pattern_error">Pattern does not match. Redraw.</string>
+
+    <string name="create_pattern_successful">Successfully created.</string>
+    <string name="overlay_prompt_pattern_title">Draw pattern to open app</string>
+    <string name="overlay_prompt_pattern_title_wrong">Wrong pattern. Draw again.</string>
+    <string name="overlay_prompt_pattern_title_correct">Pattern correct.</string>
+
+    <string name="box_safe_tip">All encrypted files here will not be displayed in their original location.</string>
+    <string name="box_detail_file">Encrypted %1$d</string>
+    <string name="box_detail_pic">Encrypted %1$d</string>
+    <string name="box_title_pic">Image Encryption</string>
+    <string name="box_title_video">Video Encryption</string>
+    <string name="box_title_audio">Audio Encryption</string>
+    <string name="box_title_file">File Encryption</string>
+    <string name="box_title_setting">Setting</string>
+
+    <string name="pic_preview">Image</string>
+    <string name="file_preview">File</string>
+    <string name="audio_preview">Audio</string>
+    <string name="video_preview">Video</string>
+
+    <string name="pic_preview_title">Encrypt Image</string>
+    <string name="file_preview_title">Encrypt File</string>
+    <string name="audio_preview_title">Encrypt Audio</string>
+    <string name="video_preview_title">Encrypt Video</string>
+
+    <string name="pic_preview_title_edit">Encrypt Image</string>
+    <string name="file_preview_title_edit">Encrypt File</string>
+    <string name="audio_preview_title_edit">Encrypt Audio</string>
+    <string name="video_preview_title_edit">Encrypt Video</string>
+
+
+    <string name="pic_preview_title_add">Add Image</string>
+    <string name="file_preview_title_add">Add File</string>
+    <string name="audio_preview_title_add">Add Audio</string>
+    <string name="video_preview_title_add">Add Video</string>
+
+    <string name="file_hide_txt_add_pic">No private image,\n please tap "Add" button to add one.</string>
+    <string name="file_hide_txt_add_file">No private file,\n please tap "Add" button to add one.</string>
+    <string name="file_hide_txt_add_audio">No private audio,\n please tap "Add" button to add one.</string>
+    <string name="file_hide_txt_add_video">No private video,\n please tap "Add" button to add one.</string>
+
+    <string name="file_hide_title">File</string>
+    <string name="file_hide_btn">Hide File</string>
+
+    <string name="file_dialog_recovery">Recover&#160;</string>
+    <string name="file_dialog_del">Delete&#160;</string>
+
+    <string name="file_dialog_recovery_missage">&#160;will be restored to its original location.</string>
+    <string name="file_dialog_del_missage">&#160;will be completely deleted and can not be recovered.</string>
+    <string name="lock_cancel">Cancel</string>
+    <string name="lock_ok">OK</string>
+
+    <string name="permissions_needed">Permissions needed</string>
+    <string name="allow_access">Allow access</string>
+    <string name="don_access">Don\'t access</string>
+    <string name="sub_title_permission_step">This app needs access to your %s to give you better experience. If you don\'t feel comfortable with this permission, you can go to setting and modify it at any time</string>
+    <string name="permissions_setting">Permissions Setting</string>
+    <string name="setting">Setting</string>
+    <string name="cancel">Cancel</string>
+    <string name="storage_access">Storage Access</string>
+    <string name="storage_access_message">Storage Access - This permission required to access all files from device and perform operation to this app</string>
+    <string name="allow">Allow</string>
+    <string name="num_of_item">%d item</string>
+    <string name="num_of_items">%d items</string>
+    <string name="use_fingerprint_to_unlock">Use fingerprint to unlock</string>
+
+    <!-- Intruders Photo Activity -->
+    <string name="title_intruders_photos">Intruders Photos</string>
+    <string name="empty_page_intruders_title">No Intruders Catched</string>
+    <string name="empty_page_intruders_description">Your phone is secure!</string>
+    <string name="setting_fingerprint_title">Enable fingerprint</string>
+
+    <string name="setting_fingerprint_description">Launch app with your fingerprint.</string>
+    <string name="setting_fingerprint_not_supported_title">Fingerprint is not supported</string>
+
+    <string name="setting_fingerprint_not_supported_description">Your device doesn\'t have sensor</string>
+    <string name="setting_fingerprint_not_registered_title">Register your fingerprint</string>
+
+    <string name="setting_fingerprint_not_registered_description">Go to security settings</string>
+
+    <string name="settings_card_intruders_title">Catch Intruders</string>
+    <string name="settings_enable_intruders_title">Take intruders picture</string>
+    <string name="settings_enable_intruders_description">Enable to catch intruders.</string>
+
+    <string name="settings_intruders_folder_title">Catched intruder photos</string>
+    <string name="settings_intruders_folder_description">Click to see spies on you phone.</string>
+
+    <string name="password_time">%1$d seconds later, try again</string>
+    <string name="password_gesture_tips">Draw pattern to unlock </string>
+    <string name="password_short">Please enter at least 4 characters.</string>
+    <string name="password_error_wait">You have entered an incorrect password 5 times. Try again in %1$d minute.</string>
+    <string name="password_error_count">The password is incorrect. You can enter %1$d times. Try again.</string>
+    <string name="num_of_times">%d times</string>
+    <string name="number_of_times_allowed">Number of times allowed</string>
+    <string name="sound_alarm">Sound Alarm</string>
+    <string name="advanced_settings">Advanced Settings</string>
+    <string name="general">General</string>
+    <string name="prevent_uninstall">Prevent Uninstall</string>
+
+    <string name="pwdsetting_advance_uninstallapp_detail">Protect %s from removing accidentally </string>
+    <string name="preview_image">Preview Image</string>
+    <string name="camouflage_icon">Camouflage Icon</string>
+
+</resources>

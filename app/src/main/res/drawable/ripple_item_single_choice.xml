@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="?attr/colorControlHighlight">
+
+    <!-- ripple mask -->
+    <item android:id="@+id/mask">
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/white" />
+            <corners android:radius="@dimen/_11sdp" />
+        </shape>
+    </item>
+
+    <!-- background shape or color -->
+    <item>
+        <shape android:shape="rectangle">
+            <stroke
+                android:width="3dp"
+                android:color="#6750A3" />
+            <corners android:radius="@dimen/_10sdp" />
+        </shape>
+    </item>
+
+</ripple>

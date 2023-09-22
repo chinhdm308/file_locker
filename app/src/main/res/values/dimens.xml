@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- dot view -->
+    <dimen name="dot_view_margin">16dp</dimen>
+    <dimen name="pattern_lock_path_width">7dp</dimen>
+    <dimen name="pattern_lock_dot_size">15dp</dimen>
+</resources>
