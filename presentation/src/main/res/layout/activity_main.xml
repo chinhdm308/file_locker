@@ -1,0 +1,32 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:id="@+id/tv_bottom_tips"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:gravity="center"
+        android:text="@string/box_safe_tip"
+        android:textColor="@color/md_black_2"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewBoxes"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_above="@id/tv_bottom_tips"
+        android:cacheColorHint="@android:color/transparent"
+        android:fastScrollEnabled="false"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@+id/tv_bottom_tips"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

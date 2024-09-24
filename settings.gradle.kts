@@ -12,11 +12,12 @@ dependencyResolutionManagement {
         mavenCentral()
         gradlePluginPortal()
         maven("https://jitpack.io")
+        maven("https://maven.google.com/")
     }
 }
 
 rootProject.name = "FileLocker"
-include(":app")
+include(":presentation")
 include(":domain")
 include(":data")
 include(":admob")

@@ -236,3 +236,7 @@ fun DependencyHandler.hiltDependencies() {
 fun DependencyHandler.lifecycleCompiler() {
     implementation(Dependencies.lifecycleCompiler)
 }
+
+fun DependencyHandler.activityDependencies() {
+    implementation(Dependencies.activityKtx)
+}

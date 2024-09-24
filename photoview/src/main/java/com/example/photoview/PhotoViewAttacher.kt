@@ -26,7 +26,8 @@ import kotlin.math.sqrt
  * It is made public in case you need to subclass something other than AppCompatImageView and still
  * gain the functionality that {@link PhotoView} offers
  */
-class PhotoViewAttacher : View.OnTouchListener,
+class PhotoViewAttacher// Wait for the confirmed onDoubleTap() instead// Can sometimes happen when getX() and getY() is called// Check to see if the user tapped on the photo// forward long click listener
+    (imageView: ImageView) : View.OnTouchListener,
     View.OnLayoutChangeListener {
 
     companion object {
@@ -55,7 +56,7 @@ class PhotoViewAttacher : View.OnTouchListener,
     private var mAllowParentInterceptOnEdge = true
     private var mBlockParentIntercept = false
 
-    private var mImageView: ImageView? = null
+    private var mImageView: ImageView? = imageView
 
     // Gesture Detectors
     private var mGestureDetector: GestureDetector? = null
@@ -111,8 +112,9 @@ class PhotoViewAttacher : View.OnTouchListener,
                 if (mHorizontalScrollEdge == HORIZONTAL_EDGE_BOTH
                     || (mHorizontalScrollEdge == HORIZONTAL_EDGE_LEFT && dx >= 1f)
                     || (mHorizontalScrollEdge == HORIZONTAL_EDGE_RIGHT && dx <= -1f)
-                    || (mVerticalScrollEdge == VERTICAL_EDGE_TOP && dy >= 1f )
-                    || (mVerticalScrollEdge == VERTICAL_EDGE_BOTTOM && dy <= -1f)) {
+                    || (mVerticalScrollEdge == VERTICAL_EDGE_TOP && dy >= 1f)
+                    || (mVerticalScrollEdge == VERTICAL_EDGE_BOTTOM && dy <= -1f)
+                ) {
                     parent?.requestDisallowInterceptTouchEvent(false)
                 }
             } else {
@@ -141,13 +143,7 @@ class PhotoViewAttacher : View.OnTouchListener,
             onScale(scaleFactor, focusX, focusY, 0f, 0f)
         }
 
-        override fun onScale(
-            scaleFactor: Float,
-            focusX: Float,
-            focusY: Float,
-            dx: Float,
-            dy: Float
-        ) {
+        override fun onScale(scaleFactor: Float, focusX: Float, focusY: Float, dx: Float, dy: Float) {
             if (getScale() < mMaxScale || scaleFactor < 1f) {
                 mScaleChangeListener?.onScaleChange(scaleFactor, focusX, focusY)
                 mSuppMatrix.postScale(scaleFactor, scaleFactor, focusX, focusY)
@@ -157,84 +153,79 @@ class PhotoViewAttacher : View.OnTouchListener,
         }
     }
 
-    constructor(imageView: ImageView) {
-        mImageView = imageView
+    init {
         imageView.setOnTouchListener(this)
         imageView.addOnLayoutChangeListener(this)
-        if (imageView.isInEditMode) {
-            return
+        if (!imageView.isInEditMode) {
+            mBaseRotation = 0.0f
+            mScaleDragDetector = CustomGestureDetector(imageView.context, onGestureListener)
+            mGestureDetector = GestureDetector(imageView.context, object : SimpleOnGestureListener() {
+                // forward long click listener
+                override fun onLongPress(e: MotionEvent) {
+                    mLongClickListener?.onLongClick(mImageView)
+                }
+
+                override fun onFling(e1: MotionEvent?, e2: MotionEvent, velocityX: Float, velocityY: Float): Boolean {
+                    if (mSingleFlingListener != null) {
+                        if (getScale() > DEFAULT_MIN_SCALE) {
+                            return false
+                        }
+                        return if ((e1?.pointerCount ?: 0) > SINGLE_TOUCH
+                            || e2.pointerCount > SINGLE_TOUCH
+                        ) {
+                            false
+                        } else mSingleFlingListener!!.onFling(e1, e2, velocityX, velocityY)
+                    }
+                    return false
+                }
+            })
+            mGestureDetector?.setOnDoubleTapListener(object : GestureDetector.OnDoubleTapListener {
+                override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
+                    mOnClickListener?.onClick(mImageView)
+                    val displayRect: RectF? = getDisplayRect()
+                    val x = e.x
+                    val y = e.y
+                    mViewTapListener?.onViewTap(mImageView, x, y)
+                    if (displayRect != null) {
+                        // Check to see if the user tapped on the photo
+                        if (displayRect.contains(x, y)) {
+                            val xResult = ((x - displayRect.left)
+                                    / displayRect.width())
+                            val yResult = ((y - displayRect.top)
+                                    / displayRect.height())
+                            mPhotoTapListener?.onPhotoTap(mImageView, xResult, yResult)
+                            return true
+                        } else {
+                            mOutsidePhotoTapListener?.onOutsidePhotoTap(mImageView)
+                        }
+                    }
+                    return false
+                }
+
+                override fun onDoubleTap(ev: MotionEvent): Boolean {
+                    try {
+                        val scale: Float = getScale()
+                        val x = ev.x
+                        val y = ev.y
+                        if (scale < getMediumScale()) {
+                            setScale(getMediumScale(), x, y, true)
+                        } else if (scale >= getMediumScale() && scale < getMaximumScale()) {
+                            setScale(getMaximumScale(), x, y, true)
+                        } else {
+                            setScale(getMinimumScale(), x, y, true)
+                        }
+                    } catch (e: ArrayIndexOutOfBoundsException) {
+                        // Can sometimes happen when getX() and getY() is called
+                    }
+                    return true
+                }
+
+                override fun onDoubleTapEvent(e: MotionEvent): Boolean {
+                    // Wait for the confirmed onDoubleTap() instead
+                    return false
+                }
+            })
         }
-        mBaseRotation = 0.0f
-        mScaleDragDetector = CustomGestureDetector(imageView.context, onGestureListener)
-        mGestureDetector = GestureDetector(imageView.context, object : SimpleOnGestureListener() {
-            // forward long click listener
-            override fun onLongPress(e: MotionEvent) {
-                mLongClickListener?.onLongClick(mImageView)
-            }
-
-            override fun onFling(
-                e1: MotionEvent, e2: MotionEvent,
-                velocityX: Float, velocityY: Float
-            ): Boolean {
-                if (mSingleFlingListener != null) {
-                    if (getScale() > DEFAULT_MIN_SCALE) {
-                        return false
-                    }
-                    return if (e1.pointerCount > SINGLE_TOUCH
-                        || e2.pointerCount > SINGLE_TOUCH
-                    ) {
-                        false
-                    } else mSingleFlingListener!!.onFling(e1, e2, velocityX, velocityY)
-                }
-                return false
-            }
-        })
-        mGestureDetector?.setOnDoubleTapListener(object : GestureDetector.OnDoubleTapListener {
-            override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
-                mOnClickListener?.onClick(mImageView)
-                val displayRect: RectF? = getDisplayRect()
-                val x = e.x
-                val y = e.y
-                mViewTapListener?.onViewTap(mImageView, x, y)
-                if (displayRect != null) {
-                    // Check to see if the user tapped on the photo
-                    if (displayRect.contains(x, y)) {
-                        val xResult = ((x - displayRect.left)
-                                / displayRect.width())
-                        val yResult = ((y - displayRect.top)
-                                / displayRect.height())
-                        mPhotoTapListener?.onPhotoTap(mImageView, xResult, yResult)
-                        return true
-                    } else {
-                        mOutsidePhotoTapListener?.onOutsidePhotoTap(mImageView)
-                    }
-                }
-                return false
-            }
-
-            override fun onDoubleTap(ev: MotionEvent): Boolean {
-                try {
-                    val scale: Float = getScale()
-                    val x = ev.x
-                    val y = ev.y
-                    if (scale < getMediumScale()) {
-                        setScale(getMediumScale(), x, y, true)
-                    } else if (scale >= getMediumScale() && scale < getMaximumScale()) {
-                        setScale(getMaximumScale(), x, y, true)
-                    } else {
-                        setScale(getMinimumScale(), x, y, true)
-                    }
-                } catch (e: ArrayIndexOutOfBoundsException) {
-                    // Can sometimes happen when getX() and getY() is called
-                }
-                return true
-            }
-
-            override fun onDoubleTapEvent(e: MotionEvent): Boolean {
-                // Wait for the confirmed onDoubleTap() instead
-                return false
-            }
-        })
     }
 
     fun setOnDoubleTapListener(newOnDoubleTapListener: GestureDetector.OnDoubleTapListener?) {
@@ -299,31 +290,16 @@ class PhotoViewAttacher : View.OnTouchListener,
     }
 
     fun getScale(): Float {
-        return sqrt(
-            (Math.pow(getValue(mSuppMatrix, Matrix.MSCALE_X).toDouble(), 2.0).toFloat() + Math.pow(
-                getValue(
-                    mSuppMatrix,
-                    Matrix.MSKEW_Y
-                ).toDouble(), 2.0
-            ).toFloat()).toDouble()
-        ).toFloat()
+        val powOne = Math.pow(getValue(mSuppMatrix, Matrix.MSCALE_X).toDouble(), 2.0).toFloat()
+        val powTwo = Math.pow(getValue(mSuppMatrix, Matrix.MSKEW_Y).toDouble(), 2.0).toFloat()
+        return sqrt((powOne + powTwo).toDouble()).toFloat()
     }
 
     fun getScaleType(): ScaleType {
         return mScaleType
     }
 
-    override fun onLayoutChange(
-        v: View?,
-        left: Int,
-        top: Int,
-        right: Int,
-        bottom: Int,
-        oldLeft: Int,
-        oldTop: Int,
-        oldRight: Int,
-        oldBottom: Int
-    ) {
+    override fun onLayoutChange(v: View?, left: Int, top: Int, right: Int, bottom: Int, oldLeft: Int, oldTop: Int, oldRight: Int, oldBottom: Int) {
         // Update our base matrix, as the bounds have changed
         if (left != oldLeft || top != oldTop || right != oldRight || bottom != oldBottom) {
             updateBaseMatrix(mImageView!!.drawable)
@@ -349,23 +325,13 @@ class PhotoViewAttacher : View.OnTouchListener,
                     if (getScale() < mMinScale) {
                         val rect = getDisplayRect()
                         if (rect != null) {
-                            v.post(
-                                AnimatedZoomRunnable(
-                                    getScale(), mMinScale,
-                                    rect.centerX(), rect.centerY()
-                                )
-                            )
+                            v.post(AnimatedZoomRunnable(getScale(), mMinScale, rect.centerX(), rect.centerY()))
                             handled = true
                         }
                     } else if (getScale() > mMaxScale) {
                         val rect = getDisplayRect()
                         if (rect != null) {
-                            v.post(
-                                AnimatedZoomRunnable(
-                                    getScale(), mMaxScale,
-                                    rect.centerX(), rect.centerY()
-                                )
-                            )
+                            v.post(AnimatedZoomRunnable(getScale(), mMaxScale, rect.centerX(), rect.centerY()))
                             handled = true
                         }
                     }
@@ -446,29 +412,14 @@ class PhotoViewAttacher : View.OnTouchListener,
     }
 
     fun setScale(scale: Float, animate: Boolean) {
-        setScale(
-            scale,
-            (
-                    mImageView!!.right / 2).toFloat(),
-            (
-                    mImageView!!.bottom / 2).toFloat(),
-            animate
-        )
+        setScale(scale, (mImageView!!.right / 2).toFloat(), (mImageView!!.bottom / 2).toFloat(), animate)
     }
 
-    fun setScale(
-        scale: Float, focalX: Float, focalY: Float,
-        animate: Boolean
-    ) {
+    fun setScale(scale: Float, focalX: Float, focalY: Float, animate: Boolean) {
         // Check to see if the scale is within bounds
         require(!(scale < mMinScale || scale > mMaxScale)) { "Scale must be within the range of minScale and maxScale" }
         if (animate) {
-            mImageView!!.post(
-                AnimatedZoomRunnable(
-                    getScale(), scale,
-                    focalX, focalY
-                )
-            )
+            mImageView!!.post(AnimatedZoomRunnable(getScale(), scale, focalX, focalY))
         } else {
             mSuppMatrix.setScale(scale, scale, focalX, focalY)
             checkAndDisplayMatrix()
@@ -640,18 +591,8 @@ class PhotoViewAttacher : View.OnTouchListener,
                 mTempSrc = RectF(0f, 0f, drawableHeight.toFloat(), drawableWidth.toFloat())
             }
             when (mScaleType) {
-                ScaleType.FIT_CENTER -> mBaseMatrix.setRectToRect(
-                    mTempSrc,
-                    mTempDst,
-                    ScaleToFit.CENTER
-                )
-
-                ScaleType.FIT_START -> mBaseMatrix.setRectToRect(
-                    mTempSrc,
-                    mTempDst,
-                    ScaleToFit.START
-                )
-
+                ScaleType.FIT_CENTER -> mBaseMatrix.setRectToRect(mTempSrc, mTempDst, ScaleToFit.CENTER)
+                ScaleType.FIT_START -> mBaseMatrix.setRectToRect(mTempSrc, mTempDst, ScaleToFit.START)
                 ScaleType.FIT_END -> mBaseMatrix.setRectToRect(mTempSrc, mTempDst, ScaleToFit.END)
                 ScaleType.FIT_XY -> mBaseMatrix.setRectToRect(mTempSrc, mTempDst, ScaleToFit.FILL)
                 else -> {}
@@ -722,9 +663,8 @@ class PhotoViewAttacher : View.OnTouchListener,
 
     inner class AnimatedZoomRunnable(
         private val mZoomStart: Float, private val mZoomEnd: Float,
-        private val mFocalX: Float, private val mFocalY: Float
-    ) :
-        Runnable {
+        private val mFocalX: Float, private val mFocalY: Float,
+    ) : Runnable {
         private val mStartTime: Long
 
         init {
@@ -751,13 +691,9 @@ class PhotoViewAttacher : View.OnTouchListener,
     }
 
     inner class FlingRunnable(context: Context?) : Runnable {
-        private val mScroller: OverScroller
+        private val mScroller: OverScroller = OverScroller(context)
         private var mCurrentX = 0
         private var mCurrentY = 0
-
-        init {
-            mScroller = OverScroller(context)
-        }
 
         fun cancelFling() {
             mScroller.forceFinished(true)
@@ -765,7 +701,7 @@ class PhotoViewAttacher : View.OnTouchListener,
 
         fun fling(
             viewWidth: Int, viewHeight: Int, velocityX: Int,
-            velocityY: Int
+            velocityY: Int,
         ) {
             val rect: RectF = getDisplayRect() ?: return
             val startX = Math.round(-rect.left)

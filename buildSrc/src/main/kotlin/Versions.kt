@@ -10,7 +10,7 @@ object Versions {
     const val coreKtx = "1.9.0"
     const val constraintLayout = "2.1.4"
     const val material = "1.9.0"
-    const val activity = "1.4.0"
+    const val activity = "1.8.0"
     const val fragmentKtx = "1.6.1"
     const val lifecycleVersion = "2.6.2"
     const val lifecycleRuntime = "2.6.2"

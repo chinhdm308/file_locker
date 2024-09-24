@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
+    <!--    API level 28+ (Uses Android native BiometricPrompt)-->
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <!--    API level 23-28 (Uses Android native FingerprintCompat)-->
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+    <uses-permission android:name="com.fingerprints.service.ACCESS_FINGERPRINT_MANAGER" />
+
+    <application
+        android:name=".BaseApplication"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Base.Theme.BaseMVVMCleanArchitecture">
+        <activity
+            android:name=".ui.intruders.IntrudersPhotosActivity"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name=".ui.setting.SettingActivity"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name=".ui.permission.PermissionActivity"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name=".ui.videohide.PlayVideoPreViewActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name=".ui.videopreview.VideoPreViewActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name=".ui.videohide.VideoHideActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name=".ui.photopreview.PhotoPreViewActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name=".ui.picpreview.PicPreViewActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name=".ui.imagehide.PicHideActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name=".ui.filehide.FileHideActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name=".ui.filepreview.FilePreViewActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name=".ui.audiopreview.AudioPreViewActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name=".ui.audiohide.AudioHideActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name=".ui.patterncreate.PatternCreateActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name=".ui.patternunlock.PatternUnlockActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name=".ui.splash.SplashActivity"
+            android:exported="true"
+            android:screenOrientation="nosensor"
+            android:theme="@style/ThemeSplash">
+        </activity>
+        <!-- <activity-alias used to change app icon dynamically>   : default icon, set enabled true    -->
+        <!-- roundIcon: put any random name started with dot-->
+        <!-- targetActivity: target activity class path will be same for all alias-->
+        <activity-alias
+            android:name=".SplashActivityDefault"
+            android:enabled="true"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:targetActivity=".ui.splash.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".CalculateLauncher"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icons8_calculate_app_96"
+            android:label="Calculate"
+            android:roundIcon="@drawable/icons8_calculate_app_96"
+            android:targetActivity=".ui.splash.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".MusicLauncher"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icons8_music_app_65"
+            android:label="Music"
+            android:roundIcon="@drawable/icons8_music_app_65"
+            android:targetActivity=".ui.splash.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".WeatherLauncher"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icons8_weather_app_65"
+            android:label="Weather"
+            android:roundIcon="@drawable/icons8_weather_app_65"
+            android:targetActivity=".ui.splash.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".AlarmLauncher"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icons8_alarm_clock_app_96"
+            android:label="Alarm"
+            android:roundIcon="@drawable/icons8_alarm_clock_app_96"
+            android:targetActivity=".ui.splash.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="nosensor" />
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <receiver
+            android:name=".receivers.DeviceMyReceiver"
+            android:description="@string/app_name"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_DEVICE_ADMIN">
+            <meta-data
+                android:name="android.app.device_admin"
+                android:resource="@xml/device_admin" />
+
+            <intent-filter>
+                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>
