@@ -18,7 +18,7 @@ class AudioHideAdapter(context: Context, onListener: OnListener) : BaseHideAdapt
             viewHolder.mTvTitle.text = ""
 
             if (data is HideAudioExt) {
-                viewHolder.mImgPreview.setImageResource(R.drawable.audio_1)
+                viewHolder.mImgPreview.setImageResource(R.drawable.audio)
                 viewHolder.mCheckBox.isChecked = data.isEnable()
                 viewHolder.mTvTitle.text = data.displayName
                 viewHolder.mTvDetail.text = data.getSizeStr()

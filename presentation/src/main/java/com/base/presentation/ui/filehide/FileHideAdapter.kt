@@ -20,7 +20,7 @@ class FileHideAdapter(context: Context, onListener: OnListener) :
             viewHolder.mTvTitle.text = ""
 
             if (data is HideFileExt) {
-                viewHolder.mImgPreview.setImageResource(R.drawable.file_1)
+                viewHolder.mImgPreview.setImageResource(R.drawable.file)
                 viewHolder.mTvTitle.text = data.name
 
                 if (edit) {

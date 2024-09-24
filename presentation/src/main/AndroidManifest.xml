@@ -122,9 +122,9 @@
             android:name=".CalculateLauncher"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icons8_calculate_app_96"
+            android:icon="@drawable/ic_calculate_app_96"
             android:label="Calculate"
-            android:roundIcon="@drawable/icons8_calculate_app_96"
+            android:roundIcon="@drawable/ic_calculate_app_96"
             android:targetActivity=".ui.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -137,9 +137,9 @@
             android:name=".MusicLauncher"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icons8_music_app_65"
+            android:icon="@drawable/ic_music_app_65"
             android:label="Music"
-            android:roundIcon="@drawable/icons8_music_app_65"
+            android:roundIcon="@drawable/ic_music_app_65"
             android:targetActivity=".ui.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -152,9 +152,9 @@
             android:name=".WeatherLauncher"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icons8_weather_app_65"
+            android:icon="@drawable/ic_weather_app_65"
             android:label="Weather"
-            android:roundIcon="@drawable/icons8_weather_app_65"
+            android:roundIcon="@drawable/ic_weather_app_65"
             android:targetActivity=".ui.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -167,9 +167,9 @@
             android:name=".AlarmLauncher"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icons8_alarm_clock_app_96"
+            android:icon="@drawable/ic_alarm_clock_app_96"
             android:label="Alarm"
-            android:roundIcon="@drawable/icons8_alarm_clock_app_96"
+            android:roundIcon="@drawable/ic_alarm_clock_app_96"
             android:targetActivity=".ui.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

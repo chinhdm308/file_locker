@@ -16,7 +16,7 @@ class AudioPreViewAdapter(context: Context, onListener: OnListener, fileList: Li
                 viewHolder.mObject = data
                 viewHolder.mImgPreview.setImageBitmap(null)
 
-                viewHolder.mImgPreview.setImageResource(R.drawable.audio_1)
+                viewHolder.mImgPreview.setImageResource(R.drawable.audio)
                 viewHolder.mTvTitle.text = data.displayName
                 viewHolder.mTvDetail.text = data.getSizeStr()
 

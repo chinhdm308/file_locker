@@ -131,7 +131,7 @@
             <ImageView
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="@dimen/_50sdp"
-                android:src="@drawable/unrecord" />
+                android:src="@drawable/ic_unrecord" />
 
             <TextView
                 android:id="@+id/file_bottom_txt_tips"

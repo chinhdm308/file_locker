@@ -73,10 +73,10 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(ActivitySettingBind
 
         binding.imgCamouflageIcon.setImageResource(
             when (viewModel.getCamouflageIconName()) {
-                CamouflageIconHelper.CamouflageIconType.CALCULATE.key -> R.drawable.icons8_calculate_app_96
-                CamouflageIconHelper.CamouflageIconType.MUSIC.key -> R.drawable.icons8_music_app_65
-                CamouflageIconHelper.CamouflageIconType.WEATHER.key -> R.drawable.icons8_weather_app_65
-                CamouflageIconHelper.CamouflageIconType.ALARM.key -> R.drawable.icons8_alarm_clock_app_96
+                CamouflageIconHelper.CamouflageIconType.CALCULATE.key -> R.drawable.ic_calculate_app_96
+                CamouflageIconHelper.CamouflageIconType.MUSIC.key -> R.drawable.ic_music_app_65
+                CamouflageIconHelper.CamouflageIconType.WEATHER.key -> R.drawable.ic_weather_app_65
+                CamouflageIconHelper.CamouflageIconType.ALARM.key -> R.drawable.ic_alarm_clock_app_96
                 else -> R.mipmap.ic_launcher_round
             }
         )

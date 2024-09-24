@@ -26,7 +26,7 @@ class VideoPreViewAdapter(context: Context, onListener: OnListener, fileList: Li
                     bitmap = BitmapUtil.toRoundBitmap(bitmap)
                     viewHolder.mImgPreview.setImageBitmap(bitmap)
                 } else {
-                    viewHolder.mImgPreview.setImageResource(R.drawable.avi_1)
+                    viewHolder.mImgPreview.setImageResource(R.drawable.avi)
                 }
 
                 viewHolder.mTvTitle.text = data.displayName

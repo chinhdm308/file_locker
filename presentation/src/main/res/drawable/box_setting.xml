@@ -10,7 +10,7 @@
     </item>
 
     <item
-        android:drawable="@drawable/baseline_settings"
+        android:drawable="@drawable/ic_settings"
         android:width="60dp"
         android:height="60dp"
         android:gravity="center" />

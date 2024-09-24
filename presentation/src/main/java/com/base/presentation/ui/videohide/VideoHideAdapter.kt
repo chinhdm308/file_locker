@@ -28,7 +28,7 @@ class VideoHideAdapter(context: Context, onListener: OnListener) : BaseHideAdapt
                     bitmap = BitmapUtil.toRoundBitmap(bitmap)
                     viewHolder.mImgPreview.setImageBitmap(bitmap)
                 } else {
-                    viewHolder.mImgPreview.setImageResource(R.drawable.avi_1)
+                    viewHolder.mImgPreview.setImageResource(R.drawable.avi)
                 }
 
                 viewHolder.mCheckBox.isChecked = data.isEnable()

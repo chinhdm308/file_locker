@@ -62,6 +62,53 @@ class PatternUnlockActivity : BaseActivity<ActivityPatternLockBinding>(ActivityP
     //The capture service
     private var pictureService: APictureCapturingService? = null
 
+    private var attemptLockout = Runnable {
+        Timber.e("errorCounter:$errorCount")
+        binding.patternLockView.reset()
+        binding.patternLockView.isEnabled = false
+
+        var millsInFuture: Long = 0
+        if (bIsFalseStart) {
+            bIsFalseStart = false
+            val defaultTime: Long =
+                Date().time - viewModel.getLastAppEnterPwdLeaverDateMilliseconds()
+            if (defaultTime < viewModel.getLastAppEnterPwdDelayTime() * 1000
+            ) {
+                millsInFuture = viewModel.getLastAppEnterPwdDelayTime() * 1000 - defaultTime
+            }
+        } else {
+            millsInFuture = (delayTime[errorCount] + 1).toLong()
+        }
+        Timber.e("attemptLockout:$millsInFuture")
+        mCountdownTimer = object : CountDownTimer(millsInFuture, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                val secondsRemaining = (millisUntilFinished / 1000).toInt() - 1
+                lastDelayTime = secondsRemaining
+                if (secondsRemaining > 0) {
+                    val format = resources.getString(
+                        R.string.password_time
+                    )
+                    val str = String.format(format, secondsRemaining)
+                    binding.textHead.text = str
+                } else {
+                    binding.textHead.setText(R.string.password_gesture_tips)
+                    binding.textHead.setTextColor(Color.WHITE)
+                }
+            }
+
+            override fun onFinish() {
+                binding.patternLockView.isEnabled = true
+                mFailedPatternAttemptsSinceLastTimeout = 0
+                errorCount += 1
+                if (errorCount > 4) {
+                    errorCount = 0
+                }
+            }
+        }.start()
+    }
+
+    private val mClearPatternRunnable = Runnable { binding.patternLockView.reset() }
+
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
         window.setBackgroundDrawableResource(R.drawable.bg_gradient_main)
@@ -134,26 +181,18 @@ class PatternUnlockActivity : BaseActivity<ActivityPatternLockBinding>(ActivityP
                 is PatternViewState.Success -> {
                     if (binding.patternLockView.getPassword(PatternViewStageState.FIRST) == viewModel.readNumPassword()) {
                         binding.textViewPrompt.setText(R.string.overlay_prompt_pattern_title_correct)
-                        if (intent.getBooleanExtra(AppConstants.EXTRA_TO_APP, false)
-                                .not() || isTaskRoot
-                        ) {
+                        if (intent.getBooleanExtra(AppConstants.EXTRA_TO_APP, false).not() || isTaskRoot) {
                             startActivity(Intent(this, MainActivity::class.java))
                         }
                         finish()
                     } else {
                         mFailedPatternAttemptsSinceLastTimeout++
-                        val retry =
-                            LockPatternUtils.FAILED_ATTEMPTS_BEFORE_TIMEOUT - mFailedPatternAttemptsSinceLastTimeout
+                        val retry = LockPatternUtils.FAILED_ATTEMPTS_BEFORE_TIMEOUT - mFailedPatternAttemptsSinceLastTimeout
                         if (retry >= 0) {
                             if (retry == 0) {
-                                Snackbar.make(
-                                    binding.root,
-                                    getString(
-                                        R.string.password_error_wait,
-                                        delayTime[errorCount] / 1000 / 60
-                                    ),
-                                    Snackbar.ANIMATION_MODE_SLIDE
-                                ).show()
+                                Snackbar.make(binding.root, getPasswordErrorWait(), Snackbar.ANIMATION_MODE_SLIDE)
+                                    .setAnchorView(binding.view)
+                                    .show()
                             }
                             val str = getString(R.string.password_error_count, retry)
                             binding.textHead.text = str
@@ -186,7 +225,9 @@ class PatternUnlockActivity : BaseActivity<ActivityPatternLockBinding>(ActivityP
 
                 is PatternViewState.Error -> {
 //                    setErrorMessage(R.string.error_message_first_stage)
-                    Snackbar.make(binding.root, getString(R.string.password_short), Snackbar.ANIMATION_MODE_SLIDE).show()
+                    Snackbar.make(binding.root, getString(R.string.password_short), Snackbar.ANIMATION_MODE_SLIDE)
+                        .setAnchorView(binding.view)
+                        .show()
                 }
 
                 else -> {}
@@ -229,50 +270,7 @@ class PatternUnlockActivity : BaseActivity<ActivityPatternLockBinding>(ActivityP
         binding.textViewPrompt.startAnimation(mShakeAnim)
     }
 
-    private var attemptLockout = Runnable {
-        Timber.e("errorCounter:$errorCount")
-        binding.patternLockView.reset()
-        binding.patternLockView.isEnabled = false
-
-        var millsInFuture: Long = 0
-        if (bIsFalseStart) {
-            bIsFalseStart = false
-            val defaultTime: Long =
-                Date().time - viewModel.getLastAppEnterPwdLeaverDateMilliseconds()
-            if (defaultTime < viewModel.getLastAppEnterPwdDelayTime() * 1000
-            ) {
-                millsInFuture = viewModel.getLastAppEnterPwdDelayTime() * 1000 - defaultTime
-            }
-        } else {
-            millsInFuture = (delayTime[errorCount] + 1).toLong()
-        }
-        Timber.e("attemptLockout:$millsInFuture")
-        mCountdownTimer = object : CountDownTimer(millsInFuture, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                val secondsRemaining = (millisUntilFinished / 1000).toInt() - 1
-                lastDelayTime = secondsRemaining
-                if (secondsRemaining > 0) {
-                    val format = resources.getString(
-                        R.string.password_time
-                    )
-                    val str = String.format(format, secondsRemaining)
-                    binding.textHead.text = str
-                } else {
-                    binding.textHead.setText(R.string.password_gesture_tips)
-                    binding.textHead.setTextColor(Color.WHITE)
-                }
-            }
-
-            override fun onFinish() {
-                binding.patternLockView.isEnabled = true
-                mFailedPatternAttemptsSinceLastTimeout = 0
-                errorCount += 1
-                if (errorCount > 4) {
-                    errorCount = 0
-                }
-            }
-        }.start()
+    private fun getPasswordErrorWait(): String {
+        return getString(R.string.password_error_wait, delayTime[errorCount] / 1000 / 60)
     }
-
-    private val mClearPatternRunnable = Runnable { binding.patternLockView.reset() }
 }

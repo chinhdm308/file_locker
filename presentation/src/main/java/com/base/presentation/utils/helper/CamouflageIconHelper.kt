@@ -21,7 +21,7 @@ class CamouflageIconHelper {
             CamouflageIconModel(
                 key = CamouflageIconType.CALCULATE.key,
                 name = CamouflageIconType.CALCULATE.appName,
-                icon = R.drawable.icons8_calculate_app_96,
+                icon = R.drawable.ic_calculate_app_96,
                 type = CamouflageIconType.CALCULATE
             )
         )
@@ -29,7 +29,7 @@ class CamouflageIconHelper {
             CamouflageIconModel(
                 key = CamouflageIconType.MUSIC.key,
                 name = CamouflageIconType.MUSIC.appName,
-                icon = R.drawable.icons8_music_app_65,
+                icon = R.drawable.ic_music_app_65,
                 type = CamouflageIconType.MUSIC
             )
         )
@@ -37,7 +37,7 @@ class CamouflageIconHelper {
             CamouflageIconModel(
                 key = CamouflageIconType.WEATHER.key,
                 name = CamouflageIconType.WEATHER.appName,
-                icon = R.drawable.icons8_weather_app_65,
+                icon = R.drawable.ic_weather_app_65,
                 type = CamouflageIconType.WEATHER
             )
         )
@@ -45,7 +45,7 @@ class CamouflageIconHelper {
             CamouflageIconModel(
                 key = CamouflageIconType.ALARM.key,
                 name = CamouflageIconType.ALARM.appName,
-                icon = R.drawable.icons8_alarm_clock_app_96,
+                icon = R.drawable.ic_alarm_clock_app_96,
                 type = CamouflageIconType.ALARM
             )
         )

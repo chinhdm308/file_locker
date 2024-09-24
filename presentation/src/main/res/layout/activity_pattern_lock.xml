@@ -61,7 +61,7 @@
         android:layout_marginHorizontal="@dimen/_30sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_5sdp"
-        android:drawableStart="@drawable/baseline_fingerprint_24"
+        android:drawableStart="@drawable/ic_fingerprint_24"
         android:gravity="center"
         android:text="@string/use_fingerprint_to_unlock"
         android:textColor="@color/white"
@@ -113,5 +113,13 @@
         app:layout_constraintRight_toRightOf="parent"
         app:lineColor="@color/white"
         app:normalStateColor="@color/white" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
