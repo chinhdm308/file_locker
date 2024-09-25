@@ -29,9 +29,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(ActivitySettingBind
 
     private val viewModel by viewModels<SettingViewModel>()
 
-    private val requestPermissions = registerForActivityResult(
-        ActivityResultContracts.RequestMultiplePermissions(),
-    ) { permissions ->
+    private val requestPermissions = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
         when {
             permissions[Manifest.permission.CAMERA] == true -> {
                 // Permission granted. Now resume your workflow.
@@ -66,8 +64,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(ActivitySettingBind
 
         binding.switchSoundAlarm.isChecked = viewModel.getPlayWarringSoundState()
 
-        binding.textNumOfTimes.text =
-            getString(R.string.num_of_times, viewModel.getNumOfTimesEnterIncorrectPwd())
+        binding.textNumOfTimes.text = getString(R.string.num_of_times, viewModel.getNumOfTimesEnterIncorrectPwd())
 
         binding.switchPreventUninstall.isChecked = viewModel.getPreventUninstall()
 

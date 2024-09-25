@@ -57,7 +57,7 @@ abstract class LocalDatabase : RoomDatabase() {
                 INSTANCE ?: buildDatabase(applicationContext).also { INSTANCE = it }
             }
 
-        private val DB_PATH = Environment.getExternalStorageDirectory().path + "/.byte2e_file_hide/.db/"
+        private val DB_PATH = Environment.getExternalStorageDirectory().path + "/.chinchin_file_hide/.db/"
 
         private fun buildDatabase(applicationContext: Context) = Room.databaseBuilder(
             applicationContext,

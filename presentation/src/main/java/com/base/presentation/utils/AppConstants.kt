@@ -6,7 +6,7 @@ import java.io.File
 
 object AppConstants {
     //Folder lock
-    const val MAIN_FOLDER = ".byte2e_file_hide"
+    const val MAIN_FOLDER = ".chinchin_file_hide"
     const val INTRUDER_FOLDER = ".intruders"
     const val FILE_LOCKER_FOLDER = ".file_hide"
     const val IMAGE_LOCKER_FOLDER = ".image_hide"
