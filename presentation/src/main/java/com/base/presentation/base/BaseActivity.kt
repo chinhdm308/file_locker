@@ -209,7 +209,7 @@ abstract class BaseActivity<VB : ViewBinding>(
 
     open fun onAccessStoragePermission() {}
 
-    fun transparentStatusAndNavigation(
+    private fun transparentStatusAndNavigation(
         systemUiScrim: Int = Color.parseColor("#40000000") // 25% black
     ) {
         var systemUiVisibility = 0
