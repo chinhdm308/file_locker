@@ -37,20 +37,17 @@ class DataStoreManager @Inject constructor(
         private val keyToken = stringPreferencesKey("keyToken")
         private val keyNumPassword = stringPreferencesKey("keyNumPassword")
         private val keyAppFirstInstanceDone = booleanPreferencesKey("keyAppFirstInstanceDone")
-        private val keyIsFingerPrintEnable = booleanPreferencesKey("keyIsFingerPrintEnable")
-        private val keyIsIntrudersCatcherEnable =
-            booleanPreferencesKey("keyIsIntrudersCatcherEnable")
+        private val keyIsFingerPrintEnable = booleanPreferencesKey("KEY_IS_FINGERPRINT_ENABLE")
+        private val keyIsIntrudersCatcherEnable = booleanPreferencesKey("KEY_IS_INTRUDERS_CATCHER_ENABLE")
         private val keyLastAppEnterCorrectPwd = booleanPreferencesKey("keyLastAppEnterCorrectPwd")
         private val keyLastAppEnterPwdErrorCount = intPreferencesKey("keyLastAppEnterPwdErrorCount")
-        private val keyLastAppEnterPwdLeaverDateMilliseconds =
-            longPreferencesKey("keyLastAppEnterPwdLeaverDateMilliseconds")
+        private val keyLastAppEnterPwdLeaverDateMilliseconds = longPreferencesKey("keyLastAppEnterPwdLeaverDateMilliseconds")
         private val keyLastAppEnterPwdDelayTime = intPreferencesKey("keyLastAppEnterPwdDelayTime")
         private val keyPlayWarringSoundState = booleanPreferencesKey("keyPlayWarringSoundState")
-        private val keyNumOfTimesEnterIncorrectPwd =
-            intPreferencesKey("keyNumOfTimesEnterIncorrectPwd")
+        private val keyNumOfTimesEnterIncorrectPwd = intPreferencesKey("keyNumOfTimesEnterIncorrectPwd")
         private val keyPreventUninstall = booleanPreferencesKey("keyPreventUninstall")
         private val keyCamouflageIconName = stringPreferencesKey("keyCamouflageIconName")
-
+        private val keyIsPatternHidden = booleanPreferencesKey("KEY_IS_PATTERN_HIDDEN")
     }
 
     override suspend fun saveToken(token: String) = dataStore.put(keyToken, token)
@@ -85,7 +82,7 @@ class DataStoreManager @Inject constructor(
         }
     }
 
-    override suspend fun isFingerPrintEnable(): Boolean {
+    override suspend fun getFingerPrintEnabled(): Boolean {
         return withContext(ioDispatcher) {
             dataStore.get(keyIsFingerPrintEnable)
         }
@@ -97,7 +94,7 @@ class DataStoreManager @Inject constructor(
         }
     }
 
-    override suspend fun isIntrudersCatcherEnable(): Boolean {
+    override suspend fun getIntrudersCatcherEnabled(): Boolean {
         return withContext(ioDispatcher) {
             dataStore.get(keyIsIntrudersCatcherEnable)
         }
@@ -202,6 +199,18 @@ class DataStoreManager @Inject constructor(
     override suspend fun setCamouflageIconName(name: String) {
         withContext(ioDispatcher) {
             dataStore.put(keyCamouflageIconName, name)
+        }
+    }
+
+    override suspend fun getHiddenDrawingMode(): Boolean {
+        return withContext(ioDispatcher) {
+            dataStore.get(keyIsPatternHidden)
+        }
+    }
+
+    override suspend fun setHiddenDrawingMode(hiddenDrawingPatternMode: Boolean) {
+        withContext(ioDispatcher) {
+            dataStore.put(keyIsPatternHidden, hiddenDrawingPatternMode)
         }
     }
 }

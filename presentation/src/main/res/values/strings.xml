@@ -128,4 +128,10 @@
     <string name="camouflage_icon">Camouflage Icon</string>
     <string name="change_pattern">Change pattern</string>
 
+    <string name="overlay_prompt_fingerprint_title">Draw pattern to open app</string>
+    <string name="overlay_prompt_fingerprint_title_wrong">Not matched. %1$s left.</string>
+    <string name="overlay_prompt_fingerprint_title_correct">Fingerprint matched!</string>
+
+
+    <string name="overlay_prompt_fingerprint_title_error">Fingerprint error! Try pattern.</string>
 </resources>

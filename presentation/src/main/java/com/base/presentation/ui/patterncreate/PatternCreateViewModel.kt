@@ -1,49 +1,62 @@
 package com.base.presentation.ui.patterncreate
 
-import androidx.lifecycle.viewModelScope
-import com.base.presentation.base.BaseViewModel
-import com.base.presentation.component.patternlockview.PatternViewState
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.base.data.local.datastore.DataStoreRepository
+import com.base.domain.models.pattern.PatternDotMetadata
+import com.base.domain.usecases.pattern.CreatePatternUseCase
+import com.base.presentation.base.BaseViewModel
+import com.base.presentation.utils.extensions.convertToPatternDot
+import com.base.presentation.utils.helper.PatternChecker
+import com.chinchin.patternlockview.PatternLockView
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 @HiltViewModel
 class PatternCreateViewModel @Inject constructor(
     private val dataStoreRepository: DataStoreRepository,
+    private val createPatternUseCase: CreatePatternUseCase
 ) : BaseViewModel() {
 
-    private val _uiState = MutableStateFlow<PatternViewState>(PatternViewState.Initial)
-    val uiState: StateFlow<PatternViewState>
-        get() = _uiState.asStateFlow()
+    private val _patternEventLiveData = MutableLiveData<CreateNewPatternViewState>().apply {
+        value = CreateNewPatternViewState(PatternEvent.INITIALIZE)
+    }
+    val patternEventLiveData: LiveData<CreateNewPatternViewState> get() = _patternEventLiveData
 
-    private var firstStagePassword: String? = null
-    private var secondStagePassword: String? = null
+    private var firstDrawedPattern: ArrayList<PatternLockView.Dot> = arrayListOf()
+    private var reDrawedPattern: ArrayList<PatternLockView.Dot> = arrayListOf()
 
-    fun updateViewState(viewState: PatternViewState) {
-        viewModelScope.launch {
-            _uiState.emit(viewState)
+
+    fun setFirstDrawedPattern(pattern: List<PatternLockView.Dot>?) {
+        pattern?.let {
+            firstDrawedPattern.clear()
+            firstDrawedPattern.addAll(pattern)
+            _patternEventLiveData.value = CreateNewPatternViewState(PatternEvent.FIRST_COMPLETED)
         }
     }
 
-    fun setFirstStagePassword(password: String?) {
-        firstStagePassword = password
-    }
-
-    fun setSecondStagePassword(password: String?) {
-        secondStagePassword = password
-        saveNewCreatedPattern()
-    }
-
-    private fun saveNewCreatedPattern() {
-        viewModelScope.launch {
-            dataStoreRepository.setAppFirstSettingInstanceDone(true)
-            dataStoreRepository.editNumPassword(secondStagePassword!!)
-            _uiState.emit(PatternViewState.NavigateMainScreen)
+    fun setRedrawnPattern(pattern: List<PatternLockView.Dot>?) {
+        pattern?.let {
+            reDrawedPattern.clear()
+            reDrawedPattern.addAll(pattern)
+            if (PatternChecker.checkPatternsEqual(firstDrawedPattern.convertToPatternDot(), reDrawedPattern.convertToPatternDot())) {
+                saveNewCreatedPattern(firstDrawedPattern)
+                _patternEventLiveData.value = CreateNewPatternViewState(PatternEvent.SECOND_COMPLETED)
+            } else {
+                firstDrawedPattern.clear()
+                reDrawedPattern.clear()
+                _patternEventLiveData.value = CreateNewPatternViewState(PatternEvent.ERROR)
+            }
         }
+    }
+
+    fun isFirstPattern(): Boolean = firstDrawedPattern.isEmpty()
+
+    private fun saveNewCreatedPattern(pattern: List<PatternLockView.Dot>) = runBlocking {
+        val patternMetadata = PatternDotMetadata(pattern.convertToPatternDot())
+        createPatternUseCase.execute(patternMetadata)
+        dataStoreRepository.setAppFirstSettingInstanceDone(true)
     }
 
 }

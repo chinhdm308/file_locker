@@ -102,17 +102,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <com.base.presentation.component.patternlockview.PatternLockView
+    <com.chinchin.patternlockview.PatternLockView
         android:id="@+id/patternLockView"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:layout_marginBottom="@dimen/_10sdp"
-        app:dotColor="@color/white"
+        app:aspectRatio="square"
+        app:dotNormalSize="16dp"
+        app:dotSelectedSize="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:lineColor="@color/white"
-        app:normalStateColor="@color/white" />
+        app:pathWidth="6dp" />
+
+<!--    <com.base.presentation.component.patternlockview.PatternLockView-->
+<!--        android:id="@+id/patternLockView"-->
+<!--        android:layout_width="300dp"-->
+<!--        android:layout_height="300dp"-->
+<!--        android:layout_marginBottom="@dimen/_10sdp"-->
+<!--        app:dotColor="@color/white"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:lineColor="@color/white"-->
+<!--        app:normalStateColor="@color/white" />-->
 
     <View
         android:id="@+id/view"

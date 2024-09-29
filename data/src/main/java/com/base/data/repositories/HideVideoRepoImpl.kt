@@ -1,8 +1,8 @@
 package com.base.data.repositories
 
 import com.base.data.di.IoDispatcher
-import com.base.data.local.dao.HideVideoDao
-import com.base.data.local.mapper.HideVideoMapper
+import com.base.data.local.database.hidevideo.HideVideoDao
+import com.base.data.local.database.hidevideo.HideVideoMapper
 import com.base.domain.models.video.HideVideo
 import com.base.domain.repositories.HideVideoRepository
 import kotlinx.coroutines.CoroutineDispatcher

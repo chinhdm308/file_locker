@@ -19,8 +19,7 @@ import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class PermissionActivity :
-    BaseActivity<ActivityPermissionBinding>(ActivityPermissionBinding::inflate) {
+class PermissionActivity : BaseActivity<ActivityPermissionBinding>(ActivityPermissionBinding::inflate) {
 
     @Inject
     lateinit var dataStoreRepository: DataStoreRepository

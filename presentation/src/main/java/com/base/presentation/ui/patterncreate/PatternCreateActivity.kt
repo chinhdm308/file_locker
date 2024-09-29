@@ -2,156 +2,66 @@ package com.base.presentation.ui.patterncreate
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import com.base.presentation.R
-import com.base.presentation.component.patternlockview.PatternViewStageState
-import com.base.presentation.component.patternlockview.PatternViewState
+import com.base.presentation.base.BaseActivity
 import com.base.presentation.databinding.ActivityPatternLockBinding
 import com.base.presentation.ui.main.MainActivity
-import com.base.presentation.utils.collectLifecycleFlow
+import com.base.presentation.utils.AppConstants
+import com.chinchin.patternlockview.PatternLockView
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class PatternCreateActivity : AppCompatActivity() {
+class PatternCreateActivity : BaseActivity<ActivityPatternLockBinding>(ActivityPatternLockBinding::inflate) {
 
     private val viewModel by viewModels<PatternCreateViewModel>()
 
-    private lateinit var binding: ActivityPatternLockBinding
+    private var mode = AppConstants.RC_CREATE_PATTERN
 
-    private val mShakeAnim: Animation by lazy {
-        AnimationUtils.loadAnimation(this, R.anim.shake_x)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun initView(savedInstanceState: Bundle?) {
+        super.initView(savedInstanceState)
 
         window.setBackgroundDrawableResource(R.drawable.bg_gradient_main)
-
-        binding = ActivityPatternLockBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
         onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {}
         })
 
-        binding.patternLockView.setOnChangeStateListener { state ->
-            viewModel.updateViewState(state)
-        }
+        mode = intent.getStringExtra(AppConstants.EXTRA_PATTERN_MODE) ?: mode
+    }
 
-        collectLifecycleFlow(viewModel.uiState) { patternViewState ->
-            when (patternViewState) {
-                is PatternViewState.Initial -> {
-                    binding.patternLockView.reset()
-//                    binding.tvMessage.run {
-//                        text = if (binding.patternLockView.stageState == PatternViewStageState.FIRST) {
-//                            getString(R.string.initial_message_first_stage)
-//                        } else {
-//                            getString(R.string.initial_message_second_stage)
-//                        }
-//                        setTextColor(
-//                            ContextCompat.getColor(
-//                                context,
-//                                R.color.message_text_default_color
-//                            )
-//                        )
-//                    }
+    override fun viewListener() {
+        super.viewListener()
 
-                    binding.textViewPrompt.run {
-                        text =
-                            if (binding.patternLockView.stageState == PatternViewStageState.FIRST) {
-                                getString(R.string.draw_pattern_title)
-                            } else {
-                                getString(R.string.redraw_pattern_title)
-                            }
-                    }
+        binding.patternLockView.addPatternLockListener(object : SimplePatternListener() {
+            override fun onComplete(pattern: MutableList<PatternLockView.Dot>?) {
+                if (viewModel.isFirstPattern()) {
+                    viewModel.setFirstDrawedPattern(pattern)
+                } else {
+                    viewModel.setRedrawnPattern(pattern)
                 }
+                binding.patternLockView.clearPattern()
+            }
+        })
+    }
 
-                is PatternViewState.Started -> {
-//                    binding.tvMessage.run {
-//                        text = getString(R.string.started_message)
-//                        setTextColor(
-//                            ContextCompat.getColor(
-//                                context,
-//                                R.color.message_text_default_color
-//                            )
-//                        )
-//                    }
-                }
+    override fun dataObservable() {
+        super.dataObservable()
 
-                is PatternViewState.Success -> {
-//                    binding.tvMessage.run {
-//                        text = if (binding.patternLockView.stageState == PatternViewStageState.FIRST) {
-//                            getString(R.string.success_message_first_stage)
-//                        } else {
-//                            getString(R.string.success_message_second_stage)
-//                        }
-//                        setTextColor(
-//                            ContextCompat.getColor(
-//                                context,
-//                                R.color.message_text_default_color
-//                            )
-//                        )
-//                    }
+        viewModel.patternEventLiveData.observe(this) { viewState ->
+            binding.textViewPrompt.text = viewState.getPromptText(this)
 
-                    if (binding.patternLockView.stageState == PatternViewStageState.SECOND) {
-                        binding.textViewPrompt.setText(R.string.create_pattern_successful)
-                    }
-
-                    if (binding.patternLockView.stageState == PatternViewStageState.FIRST) {
-                        viewModel.setFirstStagePassword(
-                            binding.patternLockView.getPassword(
-                                PatternViewStageState.FIRST
-                            )
-                        )
-                    } else {
-                        viewModel.setSecondStagePassword(
-                            binding.patternLockView.getPassword(
-                                PatternViewStageState.SECOND
-                            )
-                        )
-                    }
-
-                    if (binding.patternLockView.stageState == PatternViewStageState.FIRST) {
-                        binding.patternLockView.stageState = PatternViewStageState.SECOND
-                        viewModel.updateViewState(PatternViewState.Initial)
-                    }
-                }
-
-                is PatternViewState.Error -> {
-//                    binding.tvMessage.run {
-//                        text = if (binding.patternLockView.stageState == PatternViewStageState.FIRST) {
-//                            getString(R.string.error_message_first_stage)
-//                        } else {
-//                            getString(R.string.error_message_second_stage)
-//                        }
-//                        setTextColor(
-//                            ContextCompat.getColor(
-//                                context,
-//                                R.color.message_text_error_color
-//                            )
-//                        )
-//                    }
-
-                    binding.textViewPrompt.run {
-                        text =
-                            if (binding.patternLockView.stageState == PatternViewStageState.FIRST) {
-                                getString(R.string.error_message_first_stage)
-                            } else {
-                                getString(R.string.recreate_pattern_error)
-                            }
-                    }
-                }
-
-                is PatternViewState.NavigateMainScreen -> {
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish()
-                }
+            if (viewState.isCreatedNewPattern()) {
+                onPatternCreateCompleted()
             }
         }
+    }
+
+    private fun onPatternCreateCompleted() {
+        if (mode == AppConstants.RC_CREATE_PATTERN) {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
+        finish()
     }
 }

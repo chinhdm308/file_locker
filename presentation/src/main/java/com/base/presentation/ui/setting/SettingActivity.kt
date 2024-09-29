@@ -16,6 +16,8 @@ import com.base.presentation.base.BaseActivity
 import com.base.presentation.databinding.ActivitySettingBinding
 import com.base.presentation.ui.intruders.IntrudersPhotosActivity
 import com.base.presentation.receivers.DeviceMyReceiver
+import com.base.presentation.ui.patterncreate.PatternCreateActivity
+import com.base.presentation.utils.AppConstants
 import com.base.presentation.utils.collectLifecycleFlow
 import com.base.presentation.utils.helper.CamouflageIconHelper
 import com.base.presentation.widget.dialog.singlechoice.SingleChoiceItemDialog
@@ -41,8 +43,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(ActivitySettingBind
                     Manifest.permission.READ_MEDIA_IMAGES
                 } else Manifest.permission.WRITE_EXTERNAL_STORAGE
 
-                val showRationale =
-                    shouldShowRequestPermissionRationale(permissionString)
+                val showRationale = shouldShowRequestPermissionRationale(permissionString)
                 if (!showRationale) {
                     showPermissionSettingDialog()
                 }
@@ -82,6 +83,12 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(ActivitySettingBind
     override fun viewListener() {
         super.viewListener()
 
+        binding.textChangePattern.setOnClickListener {
+            val intent = Intent(this, PatternCreateActivity::class.java)
+            intent.putExtra(AppConstants.EXTRA_PATTERN_MODE, AppConstants.RC_CHANGE_PATTERN)
+            startActivity(intent)
+        }
+
         binding.buttonBack.setOnClickListener {
             finish()
         }
@@ -116,21 +123,17 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(ActivitySettingBind
                 else -> 0
             }
 
-            val dialog = MaterialAlertDialogBuilder(this)
-                .setTitle(getString(R.string.number_of_times_allowed))
+            val dialog = MaterialAlertDialogBuilder(this).setTitle(getString(R.string.number_of_times_allowed))
                 .setNeutralButton(getString(R.string.cancel)) { dialog, which ->
                     // Respond to neutral button press
-                }
-                .setPositiveButton("OK") { dialog, which ->
+                }.setPositiveButton("OK") { dialog, which ->
                     // Respond to positive button press
-
                 }
                 // Single-choice items (initialized with checked item)
                 .setSingleChoiceItems(singleItems, checkedItem) { dialog, which ->
                     // Respond to item chosen
                     viewModel.setNumOfTimesEnterIncorrectPwd(which + 2)
-                    binding.textNumOfTimes.text =
-                        getString(R.string.num_of_times, which + 2)
+                    binding.textNumOfTimes.text = getString(R.string.num_of_times, which + 2)
                     dialog.dismiss()
                 }
 
@@ -163,8 +166,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(ActivitySettingBind
 
         collectLifecycleFlow(viewModel.fingerPrintStatusViewState) { state ->
             binding.textFingerprintRegisterTitle.text = state.getFingerPrintSettingTitle(this)
-            binding.textFingerprintRegisterDescription.text =
-                state.getFingerPrintSettingSubtitle(this)
+            binding.textFingerprintRegisterDescription.text = state.getFingerPrintSettingSubtitle(this)
 
             binding.switchFingerPrint.isEnabled = state.isFingerPrintCheckBoxEnabled()
         }
@@ -174,8 +176,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(ActivitySettingBind
         if (isChecked) {
             requestPermissions.launch(
                 arrayOf(
-                    Manifest.permission.CAMERA,
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) Manifest.permission.READ_MEDIA_IMAGES
+                    Manifest.permission.CAMERA, if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) Manifest.permission.READ_MEDIA_IMAGES
                     else Manifest.permission.WRITE_EXTERNAL_STORAGE
                 )
             )
@@ -199,8 +200,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(ActivitySettingBind
         val intent = Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN)
         intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, componentName)
         intent.putExtra(
-            DevicePolicyManager.EXTRA_ADD_EXPLANATION,
-            getString(R.string.pwdsetting_advance_uninstallapp_detail, getString(R.string.app_name))
+            DevicePolicyManager.EXTRA_ADD_EXPLANATION, getString(R.string.pwdsetting_advance_uninstallapp_detail, getString(R.string.app_name))
         )
         startActivity(intent)
     }

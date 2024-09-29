@@ -5,22 +5,24 @@ import android.os.Environment
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.base.data.local.dao.HideAudioDao
-import com.base.data.local.dao.GroupAudioDao
-import com.base.data.local.dao.GroupFileDao
-import com.base.data.local.dao.GroupImageDao
-import com.base.data.local.dao.GroupVideoDao
-import com.base.data.local.dao.HideFileDao
-import com.base.data.local.dao.HideImageDao
-import com.base.data.local.dao.HideVideoDao
-import com.base.data.local.entities.GroupAudioEntity
-import com.base.data.local.entities.GroupFileEntity
-import com.base.data.local.entities.GroupImageEntity
-import com.base.data.local.entities.GroupVideoEntity
-import com.base.data.local.entities.HideAudioEntity
-import com.base.data.local.entities.HideFileEntity
-import com.base.data.local.entities.HideImageEntity
-import com.base.data.local.entities.HideVideoEntity
+import com.base.data.local.database.hideaudio.HideAudioDao
+import com.base.data.local.database.groupaudio.GroupAudioDao
+import com.base.data.local.database.groupfile.GroupFileDao
+import com.base.data.local.database.groupimage.GroupImageDao
+import com.base.data.local.database.groupvideo.GroupVideoDao
+import com.base.data.local.database.hidefile.HideFileDao
+import com.base.data.local.database.hideimage.HideImageDao
+import com.base.data.local.database.hidevideo.HideVideoDao
+import com.base.data.local.database.pattern.PatternDao
+import com.base.data.local.database.groupaudio.GroupAudioEntity
+import com.base.data.local.database.groupfile.GroupFileEntity
+import com.base.data.local.database.groupimage.GroupImageEntity
+import com.base.data.local.database.groupvideo.GroupVideoEntity
+import com.base.data.local.database.hideaudio.HideAudioEntity
+import com.base.data.local.database.hidefile.HideFileEntity
+import com.base.data.local.database.hideimage.HideImageEntity
+import com.base.data.local.database.hidevideo.HideVideoEntity
+import com.base.data.local.database.pattern.PatternEntity
 import com.base.data.utils.CacheConstants
 import com.base.data.utils.Migrations
 
@@ -33,7 +35,8 @@ import com.base.data.utils.Migrations
         HideImageEntity::class,
         GroupImageEntity::class,
         HideVideoEntity::class,
-        GroupVideoEntity::class
+        GroupVideoEntity::class,
+        PatternEntity::class
     ],
     version = Migrations.DB_VERSION,
     exportSchema = false
@@ -47,6 +50,7 @@ abstract class LocalDatabase : RoomDatabase() {
     abstract fun groupImageDao(): GroupImageDao
     abstract fun hideVideoDao(): HideVideoDao
     abstract fun groupVideoDao(): GroupVideoDao
+    abstract fun patternDao(): PatternDao
 
     companion object {
         @Volatile

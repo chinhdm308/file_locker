@@ -53,8 +53,8 @@ class PictureCapturingServiceImpl(activity: Activity) : APictureCapturingService
          * @param activity the activity used to get the app's context and the display manager
          * @return a new instance
          */
-        fun getInstance(activity: Activity?): APictureCapturingService {
-            return PictureCapturingServiceImpl(activity!!)
+        fun getInstance(activity: Activity): APictureCapturingService {
+            return PictureCapturingServiceImpl(activity)
         }
     }
 
@@ -131,11 +131,7 @@ class PictureCapturingServiceImpl(activity: Activity) : APictureCapturingService
     private fun openCamera() {
         Timber.d("opening camera $currentCameraId")
         try {
-            if (ActivityCompat.checkSelfPermission(
-                    context,
-                    Manifest.permission.CAMERA
-                ) == PackageManager.PERMISSION_GRANTED
-            ) {
+            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                 manager.openCamera(currentCameraId!!, stateCallback, null)
             }
         } catch (e: CameraAccessException) {
@@ -240,8 +236,7 @@ class PictureCapturingServiceImpl(activity: Activity) : APictureCapturingService
         val reader = ImageReader.newInstance(width, height, ImageFormat.JPEG, 1)
         val outputSurfaces: MutableList<Surface> = mutableListOf()
         outputSurfaces.add(reader.surface)
-        val captureBuilder =
-            cameraDevice!!.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE)
+        val captureBuilder = cameraDevice!!.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE)
         captureBuilder.addTarget(reader.surface)
         captureBuilder.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO)
 

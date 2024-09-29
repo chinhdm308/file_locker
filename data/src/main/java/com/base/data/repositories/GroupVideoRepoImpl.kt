@@ -1,8 +1,8 @@
 package com.base.data.repositories
 
 import com.base.data.di.IoDispatcher
-import com.base.data.local.dao.GroupVideoDao
-import com.base.data.local.mapper.GroupVideoMapper
+import com.base.data.local.database.groupvideo.GroupVideoDao
+import com.base.data.local.database.groupvideo.GroupVideoMapper
 import com.base.domain.models.video.GroupVideo
 import com.base.domain.repositories.GroupVideoRepository
 import kotlinx.coroutines.CoroutineDispatcher

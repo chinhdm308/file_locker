@@ -1,8 +1,8 @@
 package com.base.data.repositories
 
 import com.base.data.di.IoDispatcher
-import com.base.data.local.dao.HideFileDao
-import com.base.data.local.mapper.HideFileMapper
+import com.base.data.local.database.hidefile.HideFileDao
+import com.base.data.local.database.hidefile.HideFileMapper
 import com.base.domain.models.file.HideFile
 import com.base.domain.repositories.HideFileRepository
 import kotlinx.coroutines.CoroutineDispatcher

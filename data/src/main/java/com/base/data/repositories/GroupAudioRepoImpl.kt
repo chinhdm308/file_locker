@@ -1,8 +1,8 @@
 package com.base.data.repositories
 
 import com.base.data.di.IoDispatcher
-import com.base.data.local.dao.GroupAudioDao
-import com.base.data.local.mapper.GroupAudioMapper
+import com.base.data.local.database.groupaudio.GroupAudioDao
+import com.base.data.local.database.groupaudio.GroupAudioMapper
 import com.base.domain.models.audio.GroupAudio
 import com.base.domain.repositories.GroupAudioRepository
 import kotlinx.coroutines.CoroutineDispatcher

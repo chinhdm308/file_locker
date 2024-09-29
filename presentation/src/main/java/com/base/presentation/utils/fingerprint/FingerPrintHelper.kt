@@ -1,19 +1,26 @@
 package com.base.presentation.utils.fingerprint
 
 import android.content.Context
+import androidx.lifecycle.MutableLiveData
+import com.base.data.local.datastore.DataStoreRepository
+import com.base.presentation.utils.AppConstants
 import com.wei.android.lib.fingerprintidentify.FingerprintIdentify
 import com.wei.android.lib.fingerprintidentify.base.BaseFingerprint
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import timber.log.Timber
 import javax.inject.Inject
 
 class FingerPrintHelper @Inject constructor(
-    @ApplicationContext context: Context
+    @ApplicationContext context: Context,
+    private val dataStoreRepository: DataStoreRepository,
 ) : BaseFingerprint.ExceptionListener, CoroutineScope by CoroutineScope(Dispatchers.Default) {
 
     private val fingerprintIdentify: FingerprintIdentify = FingerprintIdentify(context)
@@ -21,7 +28,13 @@ class FingerPrintHelper @Inject constructor(
     private val _fingerPrintState = MutableSharedFlow<FingerPrintResultData>()
     val fingerPrintState get() = _fingerPrintState.asSharedFlow()
 
+    private var maxAvailableTimes: Int = AppConstants.DEFAULT_INCORRECT_TIMES
+
     fun init() {
+        maxAvailableTimes = runBlocking {
+            dataStoreRepository.getNumOfTimesEnterIncorrectPwd()
+        }
+
         try {
             fingerprintIdentify.setSupportAndroidL(true)
             fingerprintIdentify.init()
@@ -36,9 +49,7 @@ class FingerPrintHelper @Inject constructor(
     }
 
     fun pushState(state: FingerPrintResultData) {
-        launch {
-            _fingerPrintState.emit(state)
-        }
+        launch { _fingerPrintState.emit(state) }
     }
 
     private fun onActive() {

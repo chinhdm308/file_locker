@@ -8,6 +8,7 @@ import com.base.data.repositories.HideAudioRepoImpl
 import com.base.data.repositories.HideFileRepoImpl
 import com.base.data.repositories.HideImageRepoImpl
 import com.base.data.repositories.HideVideoRepoImpl
+import com.base.data.repositories.PatternRepoImpl
 import com.base.data.repositories.SetLastAppEnterPwdStateRepoImpl
 import com.base.domain.repositories.GroupAudioRepository
 import com.base.domain.repositories.GroupFileRepository
@@ -17,6 +18,7 @@ import com.base.domain.repositories.HideAudioRepository
 import com.base.domain.repositories.HideFileRepository
 import com.base.domain.repositories.HideImageRepository
 import com.base.domain.repositories.HideVideoRepository
+import com.base.domain.repositories.PatternRepository
 import com.base.domain.repositories.SetLastAppEnterPwdStateRepo
 import dagger.Binds
 import dagger.Module
@@ -53,4 +55,8 @@ interface RepositoryModule {
 
     @Binds
     fun bindSetLastAppEnterPwdStateRepo(setLastAppEnterPwdStateRepoImpl: SetLastAppEnterPwdStateRepoImpl): SetLastAppEnterPwdStateRepo
+
+    @Binds
+    fun bindPatternRepository(patternRepositoryImpl: PatternRepoImpl): PatternRepository
+
 }

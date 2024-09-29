@@ -16,6 +16,12 @@ object AppConstants {
 
     const val EXTRA_TO_APP = "EXTRA_TO_APP"
 
+    const val EXTRA_PATTERN_MODE = "EXTRA_PATTERN_MODE"
+    const val RC_CHANGE_PATTERN = "RC_CHANGE_PATTERN"
+    const val RC_CREATE_PATTERN = "RC_CREATE_PATTERN"
+
+    const val DEFAULT_INCORRECT_TIMES = 3
+
     val SD_PATH: String = Environment.getExternalStorageDirectory().path
 
     fun getHidePath(pathString: String): String {

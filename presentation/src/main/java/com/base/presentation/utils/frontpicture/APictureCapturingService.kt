@@ -16,11 +16,10 @@ import timber.log.Timber
  *
  * @param activity the activity used to get display manager and the application context
  */
-abstract class APictureCapturingService(activity: Activity) {
+abstract class APictureCapturingService(private val activity: Activity) {
 
-    private val activity: Activity
-    protected val context: Context
-    val manager: CameraManager
+    protected val context: Context = activity.applicationContext
+    protected val manager: CameraManager = context.getSystemService(Context.CAMERA_SERVICE) as CameraManager
 
     /**
      * Conversion from screen rotation to JPEG orientation.
@@ -30,12 +29,6 @@ abstract class APictureCapturingService(activity: Activity) {
         append(Surface.ROTATION_90, 0)
         append(Surface.ROTATION_180, 270)
         append(Surface.ROTATION_270, 180)
-    }
-
-    init {
-        this.activity = activity
-        this.context = activity.applicationContext
-        this.manager = context.getSystemService(Context.CAMERA_SERVICE) as CameraManager
     }
 
     /***

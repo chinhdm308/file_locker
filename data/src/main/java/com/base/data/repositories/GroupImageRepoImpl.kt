@@ -1,8 +1,8 @@
 package com.base.data.repositories
 
 import com.base.data.di.IoDispatcher
-import com.base.data.local.dao.GroupImageDao
-import com.base.data.local.mapper.GroupImageMapper
+import com.base.data.local.database.groupimage.GroupImageDao
+import com.base.data.local.database.groupimage.GroupImageMapper
 import com.base.domain.models.image.GroupImage
 import com.base.domain.repositories.GroupImageRepository
 import kotlinx.coroutines.CoroutineDispatcher

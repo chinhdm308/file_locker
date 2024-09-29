@@ -1,8 +1,8 @@
 package com.base.data.repositories
 
 import com.base.data.di.IoDispatcher
-import com.base.data.local.dao.GroupFileDao
-import com.base.data.local.mapper.GroupFileMapper
+import com.base.data.local.database.groupfile.GroupFileDao
+import com.base.data.local.database.groupfile.GroupFileMapper
 import com.base.domain.models.file.GroupFile
 import com.base.domain.repositories.GroupFileRepository
 import kotlinx.coroutines.CoroutineDispatcher

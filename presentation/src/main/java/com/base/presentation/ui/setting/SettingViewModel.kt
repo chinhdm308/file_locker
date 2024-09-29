@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.base.presentation.base.BaseViewModel
 import com.base.presentation.utils.helper.CamouflageIconHelper
 import com.base.data.local.datastore.DataStoreRepository
+import com.base.presentation.utils.fingerprint.FingerPrintStatusViewState
 import com.wei.android.lib.fingerprintidentify.FingerprintIdentify
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -42,11 +43,11 @@ class SettingViewModel @Inject constructor(
     }
 
     fun isFingerPrintEnable(): Boolean = runBlocking {
-        dataStoreRepository.isFingerPrintEnable()
+        dataStoreRepository.getFingerPrintEnabled()
     }
 
     fun isIntrudersCatcherEnabled(): Boolean = runBlocking {
-        dataStoreRepository.isIntrudersCatcherEnable()
+        dataStoreRepository.getIntrudersCatcherEnabled()
     }
 
     fun setEnableIntrudersCatchers(intruderCatcherEnabled: Boolean) {

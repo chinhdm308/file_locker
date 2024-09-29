@@ -1,8 +1,8 @@
 package com.base.data.repositories
 
 import com.base.data.di.IoDispatcher
-import com.base.data.local.dao.HideAudioDao
-import com.base.data.local.mapper.HideAudioMapper
+import com.base.data.local.database.hideaudio.HideAudioDao
+import com.base.data.local.database.hideaudio.HideAudioMapper
 import com.base.domain.models.audio.HideAudio
 import com.base.domain.repositories.HideAudioRepository
 import kotlinx.coroutines.CoroutineDispatcher

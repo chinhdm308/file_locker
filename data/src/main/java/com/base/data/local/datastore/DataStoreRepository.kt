@@ -15,11 +15,11 @@ interface DataStoreRepository {
 
     suspend fun setAppFirstSettingInstanceDone(flag: Boolean)
 
-    suspend fun isFingerPrintEnable(): Boolean
+    suspend fun getFingerPrintEnabled(): Boolean
 
     suspend fun setFingerPrintEnable(flag: Boolean)
 
-    suspend fun isIntrudersCatcherEnable(): Boolean
+    suspend fun getIntrudersCatcherEnabled(): Boolean
 
     suspend fun setIntrudersCatcherEnable(flag: Boolean)
 
@@ -54,5 +54,9 @@ interface DataStoreRepository {
     suspend fun getCamouflageIconName(): String
 
     suspend fun setCamouflageIconName(name: String)
+
+    suspend fun getHiddenDrawingMode(): Boolean
+
+    suspend fun setHiddenDrawingMode(hiddenDrawingPatternMode: Boolean)
 
 }

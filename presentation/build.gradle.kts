@@ -66,6 +66,7 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":domain"))
     implementation(project(":photoview"))
+    implementation(project(":patternlockview"))
 
     activityDependencies()
 
@@ -88,10 +89,6 @@ dependencies {
     implementation("com.nostra13.universalimageloader:universal-image-loader:1.9.5")
     lottieDependencies()
 
-//    implementation("com.wei.android.lib:fingerprintidentify:1.2.6")
-//    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
-//    implementation(files("src/main/libs/fingerprintidentify_1.2.6.aar"))
-//    implementation(linkedMapOf("name" to "fingerprintidentify_1.2.6","ext" to "aar"))
     implementation(files("libs/fingerprintidentify_1.2.6.aar"))
     implementation("com.github.zcweng:switch-button:0.0.3@aar")
     implementation("io.github.shashank02051997:FancyToast:2.0.2")

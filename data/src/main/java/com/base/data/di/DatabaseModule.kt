@@ -13,9 +13,7 @@ import javax.inject.Singleton
 class DatabaseModule {
     @Provides
     @Singleton
-    fun provideDatabase(
-        app: Application,
-    ): LocalDatabase = LocalDatabase.getInstance(app)
+    fun provideDatabase(app: Application): LocalDatabase = LocalDatabase.getInstance(app)
 
     @Provides
     @Singleton
@@ -48,4 +46,8 @@ class DatabaseModule {
     @Provides
     @Singleton
     fun provideGroupVideoDao(database: LocalDatabase) = database.groupVideoDao()
+
+    @Provides
+    @Singleton
+    fun providePatternDao(database: LocalDatabase) = database.patternDao()
 }

@@ -85,7 +85,7 @@ class BaseApplication : Application(), LifecycleEventObserver, Application.Activ
                     lastAppEnterPwdErrorCount = 0,
                     lastAppEnterPwdDelayTime = 0
                 )
-                dataStoreRepository.setNumOfTimesEnterIncorrectPwd(3)
+                dataStoreRepository.setNumOfTimesEnterIncorrectPwd(AppConstants.DEFAULT_INCORRECT_TIMES)
                 dataStoreRepository.setFingerPrintEnable(false)
                 dataStoreRepository.setIntrudersCatcherEnable(false)
                 dataStoreRepository.setPlayWarringSoundState(true)
