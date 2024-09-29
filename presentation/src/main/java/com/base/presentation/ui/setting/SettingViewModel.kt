@@ -66,6 +66,12 @@ class SettingViewModel @Inject constructor(
         }
     }
 
+    fun setHidePattern(value: Boolean) {
+        viewModelScope.launch {
+            dataStoreRepository.setHiddenDrawingMode(value)
+        }
+    }
+
     fun getNumOfTimesEnterIncorrectPwd(): Int = runBlocking {
         dataStoreRepository.getNumOfTimesEnterIncorrectPwd()
     }

@@ -105,6 +105,10 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(ActivitySettingBind
             viewModel.setPlayWarringSoundState(isChecked)
         }
 
+        binding.switchHidePattern.setOnCheckedChangeListener { view, isChecked ->
+            viewModel.setHidePattern(isChecked)
+        }
+
         binding.layoutIntrudersFolder.setOnClickListener {
             if (viewModel.isIntrudersCatcherEnabled().not()) {
                 enableIntrudersCatcher(true)
@@ -154,10 +158,6 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(ActivitySettingBind
 
         binding.llCamouflageIcon.setOnClickListener {
             changeAppIconDynamically()
-        }
-
-        binding.textChangePattern.setOnClickListener {
-
         }
     }
 

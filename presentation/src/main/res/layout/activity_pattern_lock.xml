@@ -83,13 +83,13 @@
         android:gravity="center"
         android:textColor="@color/white"
         android:textSize="@dimen/_14ssp"
-        app:layout_constraintBottom_toTopOf="@+id/textHead"
+        app:layout_constraintBottom_toTopOf="@+id/textInfo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="@string/overlay_prompt_pattern_title" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textHead"
+        android:id="@+id/textInfo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_above="@+id/patternLockView"
@@ -114,17 +114,17 @@
         app:layout_constraintRight_toRightOf="parent"
         app:pathWidth="6dp" />
 
-<!--    <com.base.presentation.component.patternlockview.PatternLockView-->
-<!--        android:id="@+id/patternLockView"-->
-<!--        android:layout_width="300dp"-->
-<!--        android:layout_height="300dp"-->
-<!--        android:layout_marginBottom="@dimen/_10sdp"-->
-<!--        app:dotColor="@color/white"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintLeft_toLeftOf="parent"-->
-<!--        app:layout_constraintRight_toRightOf="parent"-->
-<!--        app:lineColor="@color/white"-->
-<!--        app:normalStateColor="@color/white" />-->
+    <!--    <com.base.presentation.component.patternlockview.PatternLockView-->
+    <!--        android:id="@+id/patternLockView"-->
+    <!--        android:layout_width="300dp"-->
+    <!--        android:layout_height="300dp"-->
+    <!--        android:layout_marginBottom="@dimen/_10sdp"-->
+    <!--        app:dotColor="@color/white"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--        app:layout_constraintRight_toRightOf="parent"-->
+    <!--        app:lineColor="@color/white"-->
+    <!--        app:normalStateColor="@color/white" />-->
 
     <View
         android:id="@+id/view"

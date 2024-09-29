@@ -92,6 +92,37 @@
                         android:orientation="vertical">
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Hide pattern"
+                            android:textColor="@color/text_title_setting"
+                            android:textSize="@dimen/_13ssp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <com.suke.widget.SwitchButton
+                        android:id="@+id/switchHidePattern"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:sb_checked_color="#6750A3" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_13sdp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/textFingerprintRegisterTitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

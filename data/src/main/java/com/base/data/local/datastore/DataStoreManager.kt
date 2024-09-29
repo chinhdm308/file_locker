@@ -35,7 +35,6 @@ class DataStoreManager @Inject constructor(
         private const val dataStoreName = "dataStore_AppName"
 
         private val keyToken = stringPreferencesKey("keyToken")
-        private val keyNumPassword = stringPreferencesKey("keyNumPassword")
         private val keyAppFirstInstanceDone = booleanPreferencesKey("keyAppFirstInstanceDone")
         private val keyIsFingerPrintEnable = booleanPreferencesKey("KEY_IS_FINGERPRINT_ENABLE")
         private val keyIsIntrudersCatcherEnable = booleanPreferencesKey("KEY_IS_INTRUDERS_CATCHER_ENABLE")
@@ -56,18 +55,6 @@ class DataStoreManager @Inject constructor(
 
     override suspend fun clear() {
         dataStore.edit { it.clear() }
-    }
-
-    override suspend fun readNumPassword(): String {
-        return withContext(ioDispatcher) {
-            dataStore.get(keyNumPassword)
-        }
-    }
-
-    override suspend fun editNumPassword(s: String) {
-        withContext(ioDispatcher) {
-            dataStore.put(keyNumPassword, s)
-        }
     }
 
     override suspend fun getAppFirstSettingInstanceDone(): Boolean {

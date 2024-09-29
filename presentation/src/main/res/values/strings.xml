@@ -115,7 +115,8 @@
     <string name="password_gesture_tips">Draw pattern to unlock </string>
     <string name="password_short">Please enter at least 4 characters.</string>
     <string name="password_error_wait">You have entered an incorrect password 5 times. Try again in %1$d minute.</string>
-    <string name="password_error_count">The password is incorrect. You can enter %1$d times. Try again.</string>
+    <string name="password_error_count">The pattern is incorrect. You can enter %1$d times. Try again.</string>
+    <string name="password_error_count_ver2">The pattern or fingerprint is incorrect. You can enter %1$d times. Try again.</string>
     <string name="num_of_times">%d times</string>
     <string name="number_of_times_allowed">Number of times allowed</string>
     <string name="sound_alarm">Sound Alarm</string>

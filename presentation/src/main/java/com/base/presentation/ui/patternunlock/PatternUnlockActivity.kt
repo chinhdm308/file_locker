@@ -60,6 +60,8 @@ class PatternUnlockActivity : BaseActivity<ActivityPatternLockBinding>(ActivityP
     private var bIsFalseStart = false
     private var lastDelayTime = 0
 
+    private var isFingerPrintEnabled = false
+
     //The capture service
     private val pictureService: APictureCapturingService by lazy {
         PictureCapturingServiceImpl.getInstance(this)
@@ -84,15 +86,15 @@ class PatternUnlockActivity : BaseActivity<ActivityPatternLockBinding>(ActivityP
 
         mCountdownTimer = object : CountDownTimer(millsInFuture, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-                val secondsRemaining = (millisUntilFinished / 1000).toInt() - 1
+                val secondsRemaining = (millisUntilFinished / 1000).toInt()
                 lastDelayTime = secondsRemaining
                 if (secondsRemaining > 0) {
                     val format = resources.getString(R.string.password_time)
                     val str = String.format(format, secondsRemaining)
-                    binding.textHead.text = str
+                    binding.textInfo.text = str
                 } else {
-                    binding.textHead.setText(R.string.password_gesture_tips)
-                    binding.textHead.setTextColor(Color.WHITE)
+                    binding.textInfo.setText(R.string.password_gesture_tips)
+                    binding.textInfo.setTextColor(Color.WHITE)
                 }
             }
 
@@ -114,17 +116,19 @@ class PatternUnlockActivity : BaseActivity<ActivityPatternLockBinding>(ActivityP
         super.initView(savedInstanceState)
         window.setBackgroundDrawableResource(R.drawable.bg_gradient_main)
 
-        binding.textViewFingerprint.isVisible = viewModel.getFingerPrintEnabled()
+        isFingerPrintEnabled = viewModel.getFingerPrintEnabled()
+
+        binding.textViewFingerprint.isVisible = isFingerPrintEnabled
 
         binding.textViewPrompt.setText(R.string.overlay_prompt_pattern_title)
 
         bPwdIsCorrect = viewModel.getLastAppEnterCorrectPwd()
         errorCount = viewModel.getLastAppEnterPwdErrorCount()
-        Timber.e("The status is:$bPwdIsCorrect\n" + "The last unlock password was wrong, the last time was:${viewModel.getLastAppEnterPwdDelayTime()}\n" + "The number of errors is:$errorCount")
+        Timber.e("The status is:$bPwdIsCorrect\nThe last unlock password was wrong, the last time was:${viewModel.getLastAppEnterPwdDelayTime()}\nThe number of errors is:$errorCount")
         if (!bPwdIsCorrect) {
             bIsFalseStart = true
             val defaultTime: Long = Date().time - viewModel.getLastAppEnterPwdLeaverDateMilliseconds()
-            Timber.e("The last unlock password was wrong. The time until now is:$defaultTime\n" + "The last time was:${viewModel.getLastAppEnterPwdDelayTime()}")
+            Timber.e("The last unlock password was wrong. The time until now is:$defaultTime\nThe last time was:${viewModel.getLastAppEnterPwdDelayTime()}")
             if (defaultTime < viewModel.getLastAppEnterPwdDelayTime() * 1000) {
                 Timber.e("The last unlock password was wrong")
                 mHandler.postDelayed(attemptLockout, 100)
@@ -169,18 +173,28 @@ class PatternUnlockActivity : BaseActivity<ActivityPatternLockBinding>(ActivityP
             }
 
             if (state.isDrawnCorrect == false || state.fingerPrintResultData?.isNotSuccess() == true) {
+                setErrorMessage(state.getPromptMessage(this))
+
                 mFailedPatternAttemptsSinceLastTimeout++
                 val retry = LockPatternUtils.FAILED_ATTEMPTS_BEFORE_TIMEOUT - mFailedPatternAttemptsSinceLastTimeout
                 if (retry >= 0) {
-                    if (retry == 0) {
-                        Snackbar.make(binding.root, getPasswordErrorWait(), Snackbar.ANIMATION_MODE_SLIDE)
-                            .setAnchorView(binding.view)
-                            .show()
-                    }
-                    setErrorMessage(getString(R.string.password_error_count, retry))
+                    val str = if (isFingerPrintEnabled) getString(
+                        R.string.password_error_count_ver2,
+                        retry
+                    ) else getString(R.string.password_error_count, retry)
+                    binding.textInfo.text = str
+                    binding.textInfo.setTextColor(Color.RED)
+
+//                    if (retry == 0) {
+//                        Snackbar.make(binding.root, getPasswordErrorWait(), Snackbar.ANIMATION_MODE_SLIDE)
+//                            .setAnchorView(binding.view)
+//                            .show()
+//                    }
                 }
 
                 if (mFailedPatternAttemptsSinceLastTimeout >= viewModel.getNumOfTimesEnterIncorrectPwd()) {
+                    Timber.d("Đã vượt quá số lần cho phép")
+
                     // Catch intruder
                     if (viewModel.getIntrudersCatcherEnabled()) {
                         pictureService.startCapturing(null)
@@ -197,8 +211,6 @@ class PatternUnlockActivity : BaseActivity<ActivityPatternLockBinding>(ActivityP
                 } else {
                     mHandlerClearPattern.postDelayed(mClearPatternRunnable, 2000)
                 }
-
-                setErrorMessage(state.getPromptMessage(this))
             }
         }
     }
@@ -211,6 +223,8 @@ class PatternUnlockActivity : BaseActivity<ActivityPatternLockBinding>(ActivityP
     override fun onDestroy() {
         viewModel.setLastAppEnterPwdState(bPwdIsCorrect, Date().time, errorCount, lastDelayTime)
         mCountdownTimer?.cancel()
+        mHandler.removeCallbacks(attemptLockout)
+        mHandlerClearPattern.removeCallbacks(mClearPatternRunnable)
         super.onDestroy()
     }
 

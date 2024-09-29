@@ -7,10 +7,6 @@ interface DataStoreRepository {
 
     suspend fun clear()
 
-    suspend fun readNumPassword(): String
-
-    suspend fun editNumPassword(s: String)
-
     suspend fun getAppFirstSettingInstanceDone(): Boolean
 
     suspend fun setAppFirstSettingInstanceDone(flag: Boolean)

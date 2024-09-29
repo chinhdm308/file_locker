@@ -88,10 +88,6 @@ class PatternUnlockViewModel @Inject constructor(
         dataStoreRepository.getFingerPrintEnabled()
     }
 
-    fun readNumPassword(): String = runBlocking {
-        dataStoreRepository.readNumPassword()
-    }
-
     fun getLastAppEnterCorrectPwd(): Boolean = runBlocking {
         dataStoreRepository.getLastAppEnterCorrectPwd()
     }
