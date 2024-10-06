@@ -32,9 +32,11 @@
             android:layout_height="match_parent"
             android:layout_alignStart="@+id/buttonBack"
             android:layout_marginStart="72dp"
+            android:fontFamily="@font/averta_black"
             android:gravity="center_vertical"
+            android:text="@string/setting"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="@dimen/_20ssp" />
     </RelativeLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -45,36 +47,36 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:paddingVertical="@dimen/_10sdp">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_12sdp"
                 android:background="@drawable/background_group_setting"
                 android:elevation="@dimen/_5sdp"
                 android:orientation="vertical"
                 android:padding="@dimen/_5sdp">
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TitleGroupSettingStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/general"
-                    android:textColor="@color/md_black_0"
-                    android:textSize="@dimen/_13ssp" />
+                    android:text="@string/general" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textChangePattern"
+                    style="@style/TitleItemSettingStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_5sdp"
                     android:layout_marginTop="@dimen/_13sdp"
                     android:layout_weight="1"
+                    android:drawableEnd="@drawable/round_keyboard_arrow_right_24"
+                    android:drawableTint="@color/black"
                     android:paddingVertical="@dimen/_8sdp"
-                    android:text="@string/change_pattern"
-                    android:textColor="@color/text_title_setting"
-                    android:textSize="@dimen/_13ssp" />
+                    android:text="@string/change_pattern" />
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -92,11 +94,10 @@
                         android:orientation="vertical">
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/TitleItemSettingStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Hide pattern"
-                            android:textColor="@color/text_title_setting"
-                            android:textSize="@dimen/_13ssp" />
+                            android:text="@string/hide_pattern" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
                     <com.suke.widget.SwitchButton
@@ -124,18 +125,18 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/textFingerprintRegisterTitle"
+                            style="@style/TitleItemSettingStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/setting_fingerprint_not_registered_title"
-                            android:textColor="@color/text_title_setting"
-                            android:textSize="@dimen/_13ssp" />
+                            android:text="@string/setting_fingerprint_not_registered_title" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/textFingerprintRegisterDescription"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/setting_fingerprint_not_registered_description"
-                            android:textColor="@color/md_black_1" />
+                            android:textColor="@color/md_black_1"
+                            android:textSize="@dimen/_12ssp" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
                     <com.suke.widget.SwitchButton
@@ -145,24 +146,58 @@
                         app:sb_checked_color="#6750A3" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TitleItemSettingStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_13sdp"
+                    android:layout_weight="1"
+                    android:drawableEnd="@drawable/round_keyboard_arrow_right_24"
+                    android:drawableTint="@color/black"
+                    android:paddingVertical="@dimen/_8sdp"
+                    android:text="@string/language" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TitleItemSettingStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_13sdp"
+                    android:layout_weight="1"
+                    android:drawableEnd="@drawable/round_keyboard_arrow_right_24"
+                    android:drawableTint="@color/black"
+                    android:paddingVertical="@dimen/_8sdp"
+                    android:text="@string/rating" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TitleItemSettingStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_13sdp"
+                    android:layout_weight="1"
+                    android:drawableEnd="@drawable/round_keyboard_arrow_right_24"
+                    android:drawableTint="@color/black"
+                    android:paddingVertical="@dimen/_8sdp"
+                    android:text="@string/policy" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/background_group_setting"
                 android:elevation="@dimen/_5sdp"
                 android:orientation="vertical"
                 android:padding="@dimen/_5sdp">
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TitleGroupSettingStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/settings_card_intruders_title"
-                    android:textColor="@color/md_black_0"
-                    android:textSize="@dimen/_13ssp" />
+                    android:text="@string/settings_card_intruders_title" />
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -180,17 +215,17 @@
                         android:orientation="vertical">
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/TitleItemSettingStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/settings_enable_intruders_title"
-                            android:textColor="@color/text_title_setting"
-                            android:textSize="@dimen/_13ssp" />
+                            android:text="@string/settings_enable_intruders_title" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/settings_enable_intruders_description"
-                            android:textColor="@color/md_black_1" />
+                            android:textColor="@color/md_black_1"
+                            android:textSize="@dimen/_12ssp" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
                     <com.suke.widget.SwitchButton
@@ -210,36 +245,34 @@
                     android:orientation="vertical">
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/TitleItemSettingStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/settings_intruders_folder_title"
-                        android:textColor="@color/text_title_setting"
-                        android:textSize="@dimen/_13ssp" />
+                        android:text="@string/settings_intruders_folder_title" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/settings_intruders_folder_description"
-                        android:textColor="@color/md_black_1" />
+                        android:textColor="@color/md_black_1"
+                        android:textSize="@dimen/_12ssp" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/background_group_setting"
                 android:elevation="@dimen/_5sdp"
                 android:orientation="vertical"
                 android:padding="@dimen/_5sdp">
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TitleGroupSettingStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/advanced_settings"
-                    android:textColor="@color/md_black_0"
-                    android:textSize="@dimen/_13ssp" />
+                    android:text="@string/advanced_settings" />
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -250,12 +283,11 @@
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/TitleItemSettingStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/sound_alarm"
-                        android:textColor="@color/text_title_setting"
-                        android:textSize="@dimen/_13ssp" />
+                        android:text="@string/sound_alarm" />
 
                     <com.suke.widget.SwitchButton
                         android:id="@+id/switchSoundAlarm"
@@ -276,19 +308,20 @@
                     android:paddingVertical="@dimen/_8sdp">
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/TitleItemSettingStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/number_of_times_allowed"
-                        android:textColor="@color/text_title_setting"
-                        android:textSize="@dimen/_13ssp" />
+                        android:text="@string/number_of_times_allowed" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/textNumOfTimes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/averta_bold"
                         android:text="@string/num_of_times"
-                        android:textColor="@color/md_black_1" />
+                        android:textColor="@color/md_black_1"
+                        android:textSize="@dimen/_13ssp" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <androidx.appcompat.widget.LinearLayoutCompat
@@ -302,12 +335,11 @@
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/TitleItemSettingStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/prevent_uninstall"
-                        android:textColor="@color/text_title_setting"
-                        android:textSize="@dimen/_13ssp" />
+                        android:text="@string/prevent_uninstall" />
 
                     <com.suke.widget.SwitchButton
                         android:id="@+id/switchPreventUninstall"
@@ -333,17 +365,17 @@
                         android:orientation="vertical">
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/TitleItemSettingStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Use Camouflage Icon"
-                            android:textColor="@color/text_title_setting"
-                            android:textSize="@dimen/_13ssp" />
+                            android:text="@string/title_use_camouflage_icon" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Camouflage this app's icon with another app icon on your device screen"
-                            android:textColor="@color/md_black_1" />
+                            android:text="@string/desc_use_camouflage_icon"
+                            android:textColor="@color/md_black_1"
+                            android:textSize="@dimen/_12ssp" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
                     <com.google.android.material.imageview.ShapeableImageView

@@ -27,12 +27,14 @@ class PatternCreateActivity : BaseActivity<ActivityPatternLockBinding>(ActivityP
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
 
-        window.setBackgroundDrawableResource(R.drawable.bg_gradient_main)
-        onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {}
-        })
-
         mode = intent.getStringExtra(AppConstants.EXTRA_PATTERN_MODE) ?: mode
+
+        window.setBackgroundDrawableResource(R.drawable.bg_gradient_main)
+        onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(mode == AppConstants.RC_CHANGE_PATTERN) {
+            override fun handleOnBackPressed() {
+                if (isEnabled) finish()
+            }
+        })
     }
 
     override fun viewListener() {
@@ -67,9 +69,7 @@ class PatternCreateActivity : BaseActivity<ActivityPatternLockBinding>(ActivityP
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         } else {
-            Snackbar.make(binding.root, "Change pattern success", Snackbar.ANIMATION_MODE_SLIDE)
-                .setAnchorView(binding.view)
-                .show()
+            Snackbar.make(binding.root, "Change pattern success", Snackbar.ANIMATION_MODE_SLIDE).setAnchorView(binding.view).show()
 
             Handler(Looper.getMainLooper()).postDelayed({
                 startActivity(Intent(this, SplashActivity::class.java))

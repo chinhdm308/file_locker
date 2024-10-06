@@ -57,8 +57,6 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(ActivitySettingBind
         window.navigationBarColor = Color.parseColor("#F2F2F2")
         super.initView(savedInstanceState)
 
-        binding.textTitle.setText(R.string.setting)
-
         binding.switchFingerPrint.isChecked = viewModel.isFingerPrintEnable()
 
         binding.switchEnableIntrudersCatcher.isChecked = viewModel.isIntrudersCatcherEnabled()

@@ -39,10 +39,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
+                    android:fontFamily="@font/averta_bold"
                     android:gravity="center"
                     android:maxLines="1"
                     android:textColor="@color/md_black_0"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/_16ssp"
                     tools:text="File Encryption" />
 
                 <TextView
@@ -50,10 +51,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
+                    android:fontFamily="@font/averta_bold"
                     android:gravity="center"
                     android:maxLines="1"
                     android:textColor="@color/md_black_2"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_14ssp"
                     tools:text="Encrypted 0" />
             </LinearLayout>
 

@@ -20,4 +20,16 @@
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <style name="TitleGroupSettingStyle">
+        <item name="android:fontFamily">@font/averta_extra_bold</item>
+        <item name="android:textSize">@dimen/_16ssp</item>
+        <item name="android:textColor">@color/md_black_0</item>
+    </style>
+
+    <style name="TitleItemSettingStyle">
+        <item name="android:fontFamily">@font/averta_bold</item>
+        <item name="android:textSize">@dimen/_14ssp</item>
+        <item name="android:textColor">@color/title_setting_item</item>
+    </style>
 </resources>

@@ -43,5 +43,5 @@
     <color name="text_color_white">#ffffffff</color>
 
     <color name="color_toolbar_hide_file">#6750A3</color>
-    <color name="text_title_setting">#E66750A3</color>
+    <color name="title_setting_item">#E66750A3</color>
 </resources>

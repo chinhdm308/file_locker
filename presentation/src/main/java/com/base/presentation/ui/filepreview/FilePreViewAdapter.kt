@@ -15,8 +15,7 @@ class FilePreViewAdapter(
     val context: Context,
     private val onFolder: OnFolder,
     fileList: List<Any>
-) :
-    BasePreViewAdapter(context, onFolder, fileList) {
+) : BasePreViewAdapter(context, onFolder, fileList) {
     override fun initView(viewHolder: RecyclerView.ViewHolder, data: Any?) {
         if (viewHolder is FilePreViewHolder) {
             viewHolder.mTvDetail.isVisible = false

@@ -18,14 +18,12 @@ abstract class BasePreViewAdapter(
     fileList: List<Any>,
     private val type: FileType = FileType.FILE,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var mInflater: LayoutInflater
+
+    private var mInflater: LayoutInflater = LayoutInflater.from(context)
     protected var mOnListener: OnListener = onListener
-    var mFileList: List<Any> = fileList
+    protected var mFileList: List<Any> = fileList
 
-    init {
-        mInflater = LayoutInflater.from(context)
-    }
-
+    
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (type) {
             FileType.FILE -> {

@@ -135,4 +135,10 @@
 
 
     <string name="overlay_prompt_fingerprint_title_error">Fingerprint error! Try pattern.</string>
+    <string name="policy">Policy</string>
+    <string name="rating">Rating</string>
+    <string name="language">Language</string>
+    <string name="hide_pattern">Hide pattern</string>
+    <string name="title_use_camouflage_icon">Use Camouflage Icon</string>
+    <string name="desc_use_camouflage_icon">Camouflage this app\'s icon with another app icon on your device screen</string>
 </resources>
