@@ -10,9 +10,14 @@ import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.base.data.di.IoDispatcher
+import com.base.domain.models.pattern.PatternDotMetadata
+import com.squareup.moshi.Moshi
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -20,19 +25,20 @@ import javax.inject.Singleton
 class DataStoreManager @Inject constructor(
     @ApplicationContext val context: Context,
     @IoDispatcher val ioDispatcher: CoroutineDispatcher,
+    val moshi: Moshi,
 ) : DataStoreRepository {
 
     /**
      * Single data store instance
      */
-    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(dataStoreName)
+    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(DATA_STORE_NAME)
 
     private val dataStore: DataStore<Preferences> by lazy {
         context.dataStore
     }
 
     companion object {
-        private const val dataStoreName = "dataStore_AppName"
+        private const val DATA_STORE_NAME = "FileLockerLocalStorage"
 
         private val keyToken = stringPreferencesKey("keyToken")
         private val keyAppFirstInstanceDone = booleanPreferencesKey("keyAppFirstInstanceDone")
@@ -47,6 +53,42 @@ class DataStoreManager @Inject constructor(
         private val keyPreventUninstall = booleanPreferencesKey("keyPreventUninstall")
         private val keyCamouflageIconName = stringPreferencesKey("keyCamouflageIconName")
         private val keyIsPatternHidden = booleanPreferencesKey("KEY_IS_PATTERN_HIDDEN")
+        private val keyPatternDot = stringPreferencesKey("KEY_PATTERN_DOT")
+        private val keyFirstLanguage = booleanPreferencesKey("KEY_FIRST_LANGUAGE")
+    }
+
+    override suspend fun setFirstLanguage() {
+        dataStore.put(keyFirstLanguage, true)
+    }
+
+    override suspend fun getFirstLanguage(): Boolean {
+        return dataStore.get(keyFirstLanguage)
+    }
+
+    override suspend fun savePattern(pattern: PatternDotMetadata) {
+        val value = moshi.adapter(PatternDotMetadata::class.java).toJson(pattern)
+        Timber.d("savePattern: $value")
+        dataStore.put(keyPatternDot, value)
+    }
+
+    override suspend fun getPattern(): PatternDotMetadata {
+        try {
+            val value = dataStore.get(keyPatternDot)
+            Timber.d("pattern saved: $value")
+            return moshi.adapter(PatternDotMetadata::class.java).fromJson(value)!!
+        } catch (e: Exception) {
+            return PatternDotMetadata(emptyList())
+        }
+    }
+
+    override fun getPatternObservable(): Flow<PatternDotMetadata> = flow {
+        try {
+            val value = dataStore.get(keyPatternDot)
+            Timber.d("pattern saved: $value")
+            emit(moshi.adapter(PatternDotMetadata::class.java).fromJson(value)!!)
+        } catch (e: Exception) {
+            emit(PatternDotMetadata(emptyList()))
+        }
     }
 
     override suspend fun saveToken(token: String) = dataStore.put(keyToken, token)

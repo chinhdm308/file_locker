@@ -1,6 +1,8 @@
 package com.base.presentation.utils
 
 import android.os.Environment
+import com.base.presentation.R
+import com.base.presentation.ui.language.model.LanguageModel
 import java.io.File
 
 
@@ -32,4 +34,17 @@ object AppConstants {
     fun getSuffix(): String {
         return ".lock"
     }
+
+    val listLanguages = listOf(
+        LanguageModel("English", "en", R.drawable.ic_lang_eng),
+        LanguageModel("French", "fr", R.drawable.ic_lang_fran),
+        LanguageModel("German", "de", R.drawable.ic_lang_ger),
+        LanguageModel("Hindi", "hi", R.drawable.ic_lang_hin),
+        LanguageModel("Italian", "it", R.drawable.ic_lang_italy),
+        LanguageModel("Japanese", "ja", R.drawable.ic_lang_japanese),
+        LanguageModel("Korean", "ko", R.drawable.ic_lang_korean),
+        LanguageModel("Portuguese", "pt", R.drawable.ic_lang_pot),
+        LanguageModel("Spanish", "es", R.drawable.ic_lang_spain),
+        LanguageModel("Vietnamese", "vi", R.drawable.ic_lang_vietnam),
+    )
 }

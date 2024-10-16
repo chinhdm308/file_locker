@@ -3,10 +3,9 @@ plugins {
     id("org.jetbrains.kotlin.android")
 }
 
-apply<MainGradlePlugin>()
-
 android {
     namespace = "com.example.photoview"
+    compileSdk = project.libs.versions.compileSDKVersion.get().toInt()
 
     buildTypes {
         release {
@@ -17,9 +16,20 @@ android {
             )
         }
     }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_18
+        targetCompatibility = JavaVersion.VERSION_18
+    }
+
+    kotlinOptions {
+        jvmTarget = "18"
+    }
 }
 
 dependencies {
-    androidxCoreDependencies(hasConstraintLayout = false)
-    androidTestsDependencies()
+    implementation(libs.coreKtx)
+    implementation(libs.appcompat)
+    implementation(libs.material)
+    implementation(libs.constraintlayout)
 }

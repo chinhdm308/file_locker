@@ -20,6 +20,5 @@ rootProject.name = "FileLocker"
 include(":presentation")
 include(":domain")
 include(":data")
-include(":admob")
 include(":photoview")
 include(":patternlockview")

@@ -11,12 +11,12 @@ abstract class BasePreViewActivity : BaseActivity<ActivityFilePreviewBinding>(Ac
     BasePreViewAdapter.OnListener {
 
     /**
-     * 当前选中的文件夹ID标识
+     * The ID of the currently selected folder
      */
     protected var mBeyondGroupId: Long = 0
 
     override fun initView(savedInstanceState: Bundle?) {
-        window.statusBarColor = getColor(R.color.color_toolbar_hide_file)
+        window.statusBarColor = getColor(R.color.white)
         super.initView(savedInstanceState)
 
         initUI()
@@ -32,7 +32,7 @@ abstract class BasePreViewActivity : BaseActivity<ActivityFilePreviewBinding>(Ac
             }
         }
 
-        binding.btnBack.setOnClickListener {
+        binding.ivBack.setOnClickListener {
             onBack()
         }
     }
@@ -56,12 +56,12 @@ abstract class BasePreViewActivity : BaseActivity<ActivityFilePreviewBinding>(Ac
     }
 
     /**
-     * 隐藏当前选中项
+     * Hide currently selected item
      */
     abstract fun hideFiles()
 
     protected open fun setTitleRID(titleRID: Int) {
-        binding.fileHideTxtTitle.setText(titleRID)
+        binding.tvTitle.setText(titleRID)
     }
 
     override fun setSelect(selected: Boolean) {

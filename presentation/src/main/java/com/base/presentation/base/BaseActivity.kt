@@ -23,6 +23,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 import com.base.presentation.R
+import com.base.presentation.utils.SystemUtil
 import com.base.presentation.widget.dialog.LoadingDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import timber.log.Timber
@@ -90,8 +91,10 @@ abstract class BaseActivity<VB : ViewBinding>(
     override fun onCreate(savedInstanceState: Bundle?) {
         if (activeFlagSecured) setFlagSecure()
         transparentStatusAndNavigation()
-//        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
+        SystemUtil.setLocale(this)
+        adjustFontScale(this, resources.configuration)
+
         _binding = inflater.invoke(layoutInflater)
         setContentView(requireNotNull(_binding).root)
 
@@ -249,5 +252,16 @@ abstract class BaseActivity<VB : ViewBinding>(
         }
 
         window.attributes = winParams
+    }
+
+    private fun adjustFontScale(context: Context, configuration: Configuration) {
+        if (configuration.fontScale != 1f) {
+            configuration.fontScale = 1f
+            val metrics = context.resources.displayMetrics
+            val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+            wm.defaultDisplay.getMetrics(metrics)
+            metrics.scaledDensity = configuration.fontScale * metrics.density
+            context.resources.updateConfiguration(configuration, metrics)
+        }
     }
 }

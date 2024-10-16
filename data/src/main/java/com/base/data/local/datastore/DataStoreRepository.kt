@@ -1,6 +1,14 @@
 package com.base.data.local.datastore
 
+import com.base.domain.models.pattern.PatternDotMetadata
+import kotlinx.coroutines.flow.Flow
+
 interface DataStoreRepository {
+
+    suspend fun setFirstLanguage()
+
+    suspend fun getFirstLanguage(): Boolean
+
     suspend fun saveToken(token: String)
 
     suspend fun getToken(): String
@@ -55,4 +63,9 @@ interface DataStoreRepository {
 
     suspend fun setHiddenDrawingMode(hiddenDrawingPatternMode: Boolean)
 
+    suspend fun savePattern(pattern: PatternDotMetadata)
+
+    fun getPatternObservable(): Flow<PatternDotMetadata>
+
+    suspend fun getPattern(): PatternDotMetadata
 }

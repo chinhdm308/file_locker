@@ -26,10 +26,7 @@ class PicHideActivity : BaseHideActivity(), BaseHideAdapter.OnListener {
     lateinit var groupImageService: GroupImageService
 
     override fun initUI() {
-        setTitleRID(
-            R.string.pic_preview_title,
-            R.string.pic_preview_title_edit
-        )
+        setTitleRID(R.string.pic_preview_title, R.string.pic_preview_title_edit)
         binding.fileBottomTxtTips.setText(R.string.file_hide_txt_add_pic)
 
         setRidStringType(R.string.pic_preview)

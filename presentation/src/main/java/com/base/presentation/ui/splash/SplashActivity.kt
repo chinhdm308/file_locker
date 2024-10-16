@@ -12,12 +12,14 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.base.presentation.R
 import com.base.data.local.datastore.DataStoreRepository
+import com.base.presentation.ui.language.LanguageStartActivity
 import com.base.presentation.ui.patterncreate.PatternCreateActivity
 import com.base.presentation.ui.patternunlock.PatternUnlockActivity
 import com.base.presentation.ui.permission.PermissionActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -47,7 +49,12 @@ class SplashActivity : AppCompatActivity() {
 
         MainScope().launch {
             delay(3000L)
-            startActivity()
+            if (dataStoreRepository.getFirstLanguage().not()) {
+                startActivity(Intent(this@SplashActivity, LanguageStartActivity::class.java))
+            } else {
+                startActivity()
+            }
+            finish()
         }
     }
 
@@ -62,13 +69,12 @@ class SplashActivity : AppCompatActivity() {
         val intent = if (!isPermissionGranted) {
             Intent(this, PermissionActivity::class.java)
         } else {
-            if (dataStoreRepository.getAppFirstSettingInstanceDone()) {
+            if (dataStoreRepository.getPattern().pattern.isEmpty().not()) {
                 Intent(this, PatternUnlockActivity::class.java)
             } else {
                 Intent(this, PatternCreateActivity::class.java)
             }
         }
         startActivity(intent)
-        finish()
     }
 }

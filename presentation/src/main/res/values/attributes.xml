@@ -45,4 +45,9 @@
         <!-- if true, delays calls to OnClickListeners until ripple effect ends -->
         <attr name="clickAfterRipple" format="boolean" />
     </declare-styleable>
+
+    <declare-styleable name="LayoutAppHeaderAttributes">
+        <attr name="title" format="string" />
+        <attr name="showBackButton" format="boolean" />
+    </declare-styleable>
 </resources>

@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.base.data.local.datastore.DataStoreRepository
 import com.base.domain.models.pattern.PatternDotMetadata
-import com.base.domain.usecases.pattern.CreatePatternUseCase
 import com.base.presentation.base.BaseViewModel
 import com.base.presentation.utils.extensions.convertToPatternDot
 import com.base.presentation.utils.helper.PatternChecker
@@ -16,7 +15,6 @@ import javax.inject.Inject
 @HiltViewModel
 class PatternCreateViewModel @Inject constructor(
     private val dataStoreRepository: DataStoreRepository,
-    private val createPatternUseCase: CreatePatternUseCase
 ) : BaseViewModel() {
 
     private val _patternEventLiveData = MutableLiveData<CreateNewPatternViewState>().apply {
@@ -55,7 +53,7 @@ class PatternCreateViewModel @Inject constructor(
 
     private fun saveNewCreatedPattern(pattern: List<PatternLockView.Dot>) = runBlocking {
         val patternMetadata = PatternDotMetadata(pattern.convertToPatternDot())
-        createPatternUseCase.execute(patternMetadata)
+        dataStoreRepository.savePattern(patternMetadata)
         dataStoreRepository.setAppFirstSettingInstanceDone(true)
     }
 

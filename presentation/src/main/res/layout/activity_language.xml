@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F2F2F2"
+    android:orientation="vertical">
+
+    <com.base.presentation.ui.view.LayoutAppHeader
+        android:id="@+id/layoutAppHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="@string/language" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/_15sdp"
+        tools:itemCount="5"
+        tools:listitem="@layout/item_language_start" />
+
+    <FrameLayout
+        android:id="@+id/nativeAds"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!--        <include layout="@layout/shimmer_native_small" />-->
+    </FrameLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

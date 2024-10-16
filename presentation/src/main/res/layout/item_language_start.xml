@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutItemLanguage"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_8sdp"
+    android:background="@drawable/bg_border_item_lang_normal"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingHorizontal="@dimen/_10sdp"
+    android:paddingVertical="@dimen/_8sdp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/ivFlag"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:scaleType="centerCrop"
+        app:shapeAppearanceOverlay="@style/RoundedImageViewRounded"
+        tools:src="@drawable/ic_lang_eng" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvLang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:fontFamily="@font/averta_bold"
+        android:textColor="@color/color_text_primary"
+        android:textSize="@dimen/_16ssp"
+        tools:text="English" />
+</androidx.appcompat.widget.LinearLayoutCompat>

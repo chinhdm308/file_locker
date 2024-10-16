@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#6750A3"
@@ -11,39 +12,35 @@
         android:id="@+id/rl_title"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
         android:clipToPadding="false"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        android:gravity="center_vertical">
 
-        <RelativeLayout
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivBack"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:background="@drawable/bg_setting_button"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/ic_round_arrow_back_ios_24"
+            app:tint="#777aa1" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitle"
+            style="@style/TextHeaderStyle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_toStartOf="@+id/pic_hide_btn_edit"
+            android:layout_toEndOf="@+id/ivBack"
+            android:gravity="center_vertical"
+            tools:text="Screen Title" />
 
-            <ImageView
-                android:id="@+id/btn_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:gravity="center"
-                android:src="@drawable/ic_keyboard_backspace_24" />
-
-            <TextView
-                android:id="@+id/file_hide_txt_title"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignStart="@+id/btn_back"
-                android:layout_marginStart="72dp"
-                android:gravity="center_vertical"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
-        </RelativeLayout>
-
-
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/pic_hide_btn_preview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,46 +51,56 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_edit_24" />
 
-        <!--编辑状态-->
-        <LinearLayout
+        <!--Edit status-->
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/pic_hide_btn_edit"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:gravity="center_vertical"
             android:visibility="invisible">
 
-            <!--全选按钮-->
-            <androidx.appcompat.widget.AppCompatCheckBox
-                android:id="@+id/item_file_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
+            <!--Select all button-->
+            <FrameLayout
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
-                android:background="@drawable/checkbox_selector"
-                android:button="@null"
-                android:checked="false"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                app:buttonCompat="@null" />
+                android:background="@drawable/bg_setting_button">
 
-            <ImageView
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/item_file_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/checkbox_selector"
+                    android:button="@null"
+                    android:checked="false"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    app:buttonCompat="@null"
+                    app:tint="#777aa1" />
+            </FrameLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/pic_hide_img_recovery"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_rotate_right_24" />
+                android:background="@drawable/bg_setting_button"
+                android:padding="@dimen/_5sdp"
+                android:src="@drawable/ic_rotate_right_24"
+                app:tint="#777aa1" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/pic_hide_img_del"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_delete_24" />
-        </LinearLayout>
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:background="@drawable/bg_setting_button"
+                android:padding="@dimen/_5sdp"
+                android:src="@drawable/ic_delete_24"
+                app:tint="#777aa1" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
     </RelativeLayout>
 
@@ -120,7 +127,7 @@
             android:layout_marginBottom="16dp"
             app:srcCompat="@drawable/ic_add_24" />
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/file_bottom_layout_tips"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -128,12 +135,12 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="@dimen/_50sdp"
                 android:src="@drawable/ic_unrecord" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/file_bottom_txt_tips"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
@@ -145,7 +152,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="150dp" />
-        </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
     </RelativeLayout>
 </LinearLayout>

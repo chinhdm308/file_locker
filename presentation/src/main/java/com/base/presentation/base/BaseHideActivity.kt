@@ -38,7 +38,7 @@ abstract class BaseHideActivity :
     protected var mBaseHideAdapter: BaseHideAdapter? = null
 
     override fun initView(savedInstanceState: Bundle?) {
-        window.statusBarColor = getColor(R.color.color_toolbar_hide_file)
+        window.statusBarColor = getColor(R.color.white)
         super.initView(savedInstanceState)
 
         initUI()
@@ -56,7 +56,7 @@ abstract class BaseHideActivity :
             selectAll(binding.itemFileCheckbox.isChecked)
         }
 
-        binding.btnBack.setOnClickListener {
+        binding.ivBack.setOnClickListener {
             if (!onBack()) {
                 onHome()
                 finish()
@@ -258,15 +258,13 @@ abstract class BaseHideActivity :
         if (isEdit) {
             binding.picHideBtnPreview.visibility = View.GONE
             binding.picHideBtnEdit.visibility = View.VISIBLE
-//            mBtn_back.setAction(CloseAction(), ActionView.ROTATE_COUNTER_CLOCKWISE)
             binding.hideBtnAdd.visibility = View.GONE
-            binding.fileHideTxtTitle.text = ""
+            binding.tvTitle.text = ""
         } else {
             binding.picHideBtnPreview.visibility = View.VISIBLE
             binding.picHideBtnEdit.visibility = View.GONE
-//            mBtn_back.setAction(BackAction(), ActionView.ROTATE_CLOCKWISE)
             binding.hideBtnAdd.visibility = View.VISIBLE
-            binding.fileHideTxtTitle.setText(mRidTitleTxt)
+            binding.tvTitle.setText(mRidTitleTxt)
         }
     }
 
@@ -291,7 +289,7 @@ abstract class BaseHideActivity :
     }
 
     /**
-     * 设置是否有数据
+     * Set whether there is data
      *
      * @param groupList
      * @param list

@@ -36,7 +36,7 @@ class PhotoPreViewActivity :
     private lateinit var mSamplePagerAdapter: SamplePagerAdapter
 
     override fun initView(savedInstanceState: Bundle?) {
-        window.statusBarColor = getColor(R.color.color_toolbar_hide_file)
+        window.statusBarColor = getColor(R.color.white)
         super.initView(savedInstanceState)
 
         mSamplePagerAdapter = SamplePagerAdapter(listOf())

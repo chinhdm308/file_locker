@@ -1,7 +1,7 @@
 plugins {
     id("java-library")
     id("org.jetbrains.kotlin.jvm")
-    kotlin("kapt")
+    id("kotlin-kapt")
 }
 
 java {
@@ -10,6 +10,8 @@ java {
 }
 
 dependencies {
-    kotlinxCoroutinesAndroidDependencies()
-    daggerAndroid()
+    implementation(libs.coroutinesAndroid)
+
+    implementation(libs.dagger)
+    kapt(libs.daggerCompiler)
 }

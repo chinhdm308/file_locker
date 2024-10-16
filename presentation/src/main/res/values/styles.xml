@@ -28,8 +28,20 @@
     </style>
 
     <style name="TitleItemSettingStyle">
-        <item name="android:fontFamily">@font/averta_bold</item>
+        <item name="android:fontFamily">@font/averta_regular</item>
         <item name="android:textSize">@dimen/_14ssp</item>
         <item name="android:textColor">@color/title_setting_item</item>
+    </style>
+
+    <style name="RoundedImageViewRounded">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="TextHeaderStyle">
+        <item name="android:fontFamily">@font/averta_black</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/_20ssp</item>
+        <item name="android:textColor">@color/color_text_primary</item>
     </style>
 </resources>

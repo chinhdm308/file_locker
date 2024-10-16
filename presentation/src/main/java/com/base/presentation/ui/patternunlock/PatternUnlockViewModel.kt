@@ -9,18 +9,22 @@ import com.base.domain.usecases.pattern.GetPatternUseCase
 import com.base.presentation.utils.fingerprint.FingerPrintHelper
 import com.base.presentation.utils.helper.PatternChecker
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import timber.log.Timber
+import java.sql.Time
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,7 +32,6 @@ class PatternUnlockViewModel @Inject constructor(
     private val fingerPrintHelper: FingerPrintHelper,
     private val dataStoreRepository: DataStoreRepository,
     private val setLastAppEnterPwdStateUseCase: SetLastAppEnterPwdStateUseCase,
-    private val getPatternUseCase: GetPatternUseCase,
 ) : BaseViewModel() {
 
     private val fingerPrintState = fingerPrintHelper.fingerPrintState
@@ -43,9 +46,11 @@ class PatternUnlockViewModel @Inject constructor(
             fingerPrintHelper.init()
         }
 
-        val existingPatternObservable = getPatternUseCase.execute().map { it.pattern }
+        val existingPatternObservable = dataStoreRepository.getPatternObservable().map { it.pattern }
 
         combine(patternDrawnState, existingPatternObservable) { patternDraw, existingPattern ->
+            Timber.d("combine patternDraw: $patternDraw")
+            Timber.d("combine existingPattern: $existingPattern")
             val isValidated = PatternChecker.checkPatternsEqual(patternDraw, existingPattern)
             _patternValidationViewState.emit(
                 OverlayViewState(
@@ -81,6 +86,7 @@ class PatternUnlockViewModel @Inject constructor(
     }
 
     fun onPatternDrawn(pattern: List<PatternDot>) = viewModelScope.launch {
+        Timber.d("onPatternDrawn: $pattern")
         patternDrawnState.emit(pattern)
     }
 

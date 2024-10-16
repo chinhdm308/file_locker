@@ -39,67 +39,81 @@
         android:theme="@style/Base.Theme.BaseMVVMCleanArchitecture">
         <activity
             android:name=".ui.intruders.IntrudersPhotosActivity"
-            android:screenOrientation="nosensor" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.setting.SettingActivity"
-            android:screenOrientation="nosensor" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.permission.PermissionActivity"
-            android:screenOrientation="nosensor" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.videohide.PlayVideoPreViewActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="nosensor" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.videopreview.VideoPreViewActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="nosensor" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.videohide.VideoHideActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="nosensor" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.photopreview.PhotoPreViewActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="nosensor" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.picpreview.PicPreViewActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="nosensor" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.imagehide.PicHideActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="nosensor" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.filehide.FileHideActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="nosensor" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.filepreview.FilePreViewActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="nosensor" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.audiopreview.AudioPreViewActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="nosensor" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.audiohide.AudioHideActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="nosensor" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.patterncreate.PatternCreateActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="nosensor" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.patternunlock.PatternUnlockActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="nosensor" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.splash.SplashActivity"
             android:exported="true"
-            android:screenOrientation="nosensor"
             android:theme="@style/ThemeSplash">
         </activity>
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.language.LanguageActivity"
+            android:configChanges="orientation"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.language.LanguageStartActivity"
+            android:configChanges="orientation"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <!-- <activity-alias used to change app icon dynamically>   : default icon, set enabled true    -->
         <!-- roundIcon: put any random name started with dot-->
         <!-- targetActivity: target activity class path will be same for all alias-->
@@ -178,11 +192,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity-alias>
-
-        <activity
-            android:name=".ui.main.MainActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="nosensor" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"

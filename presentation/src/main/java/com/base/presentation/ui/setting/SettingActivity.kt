@@ -16,6 +16,7 @@ import com.base.presentation.base.BaseActivity
 import com.base.presentation.databinding.ActivitySettingBinding
 import com.base.presentation.ui.intruders.IntrudersPhotosActivity
 import com.base.presentation.receivers.DeviceMyReceiver
+import com.base.presentation.ui.language.LanguageActivity
 import com.base.presentation.ui.patterncreate.PatternCreateActivity
 import com.base.presentation.utils.AppConstants
 import com.base.presentation.utils.collectLifecycleFlow
@@ -53,8 +54,9 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(ActivitySettingBind
 
 
     override fun initView(savedInstanceState: Bundle?) {
-        window.statusBarColor = getColor(R.color.color_toolbar_hide_file)
-        window.navigationBarColor = Color.parseColor("#F2F2F2")
+        window.statusBarColor = getColor(R.color.white)
+        //window.navigationBarColor = Color.parseColor("#F2F2F2")
+
         super.initView(savedInstanceState)
 
         binding.switchFingerPrint.isChecked = viewModel.isFingerPrintEnable()
@@ -73,7 +75,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(ActivitySettingBind
                 CamouflageIconHelper.CamouflageIconType.MUSIC.key -> R.drawable.ic_music_app_65
                 CamouflageIconHelper.CamouflageIconType.WEATHER.key -> R.drawable.ic_weather_app_65
                 CamouflageIconHelper.CamouflageIconType.ALARM.key -> R.drawable.ic_alarm_clock_app_96
-                else -> R.mipmap.ic_launcher_round
+                else -> R.drawable.ic_hidden_folder
             }
         )
     }
@@ -87,7 +89,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(ActivitySettingBind
             startActivity(intent)
         }
 
-        binding.buttonBack.setOnClickListener {
+        binding.appHeader.setOnBackPress {
             finish()
         }
 
@@ -156,6 +158,10 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(ActivitySettingBind
 
         binding.llCamouflageIcon.setOnClickListener {
             changeAppIconDynamically()
+        }
+
+        binding.tvLanguage.setOnClickListener {
+            startActivity(Intent(this, LanguageActivity::class.java))
         }
     }
 

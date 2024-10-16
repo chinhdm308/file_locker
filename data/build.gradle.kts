@@ -1,16 +1,14 @@
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
-//    `android-library`
-//    `kotlin-android`
-    kotlin("kapt")
-    id("com.google.dagger.hilt.android")
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.hiltAndroid)
+    alias(libs.plugins.ksp)
+    id("kotlin-kapt")
 }
-
-apply<MainGradlePlugin>()
 
 android {
     namespace = "com.base.data"
+    compileSdk = project.libs.versions.compileSDKVersion.get().toInt()
 
     buildTypes {
         release {
@@ -25,21 +23,45 @@ android {
     buildFeatures {
         buildConfig = true
     }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_18
+        targetCompatibility = JavaVersion.VERSION_18
+    }
+
+    kotlinOptions {
+        jvmTarget = "18"
+    }
 }
 
 dependencies {
     implementation(project(":domain"))
 
-    androidxCoreDependencies(hasConstraintLayout = false, hasMaterial = false, hasAppCompat = false)
-    androidTestsDependencies()
+    implementation(libs.coreKtx)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.testJunit)
+    androidTestImplementation(libs.testEspressoCore)
 
-    moshiKotlin()
-    hiltDependencies()
-    networkDependencies()
-    roomDependencies()
+    implementation(libs.moshiKotlin)
+    ksp(libs.moshiKotlinCodegen)
 
-    // Preferences DataStore
-    datastorePreferences()
+    implementation(libs.hiltAndroid)
+    kapt(libs.hiltAndroidCompiler)
 
-    timber()
+    implementation(libs.retrofit)
+    implementation(libs.converterMoshi)
+
+    // define a BOM and its version
+    implementation(platform(libs.okhttpBom))
+    // define any required OkHttp artifacts without version
+    implementation(libs.bundles.okhttp)
+
+    implementation(libs.roomKtx)
+    implementation(libs.roomRuntime)
+    ksp(libs.roomCompiler)
+
+    implementation(libs.datastorePreferences)
+    implementation(libs.datastorePreferencesCore)
+
+    implementation(libs.timber)
 }

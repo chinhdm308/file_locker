@@ -2,26 +2,27 @@ import java.util.Properties
 import java.io.FileInputStream
 
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    id("com.google.dagger.hilt.android")
-//    id("com.google.devtools.ksp")
+    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hiltAndroid)
+//    alias(libs.plugins.googleServices)
+//    alias(libs.plugins.firebaseCrashlytics)
+//    alias(libs.plugins.firebasePerf)
     id("kotlin-parcelize")
-    kotlin("kapt")
-    id("com.google.gms.google-services")
-
+    id("kotlin-kapt")
 }
 
 android {
     namespace = "com.base.presentation"
-    compileSdk = ProjectConfig.compileSdk
+    compileSdk = project.libs.versions.compileSDKVersion.get().toInt()
 
     defaultConfig {
         applicationId = "com.chinchin.filelocker"
-        minSdk = ProjectConfig.minSdk
-        targetSdk = ProjectConfig.targetSdk
-        versionCode = ProjectConfig.versionCode
-        versionName = ProjectConfig.versionName
+        minSdk = project.libs.versions.minimumSDK.get().toInt()
+        targetSdk = project.libs.versions.targetSDK.get().toInt()
+        versionCode = 1
+        versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -39,7 +40,8 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -68,27 +70,34 @@ dependencies {
     implementation(project(":photoview"))
     implementation(project(":patternlockview"))
 
-    activityDependencies()
+    implementation(libs.coreKtx)
+    implementation(libs.appcompat)
+    implementation(libs.material)
+    implementation(libs.constraintlayout)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.testJunit)
+    androidTestImplementation(libs.testEspressoCore)
 
-    androidxCoreDependencies()
-    androidTestsDependencies()
+    //DI
+    implementation(libs.hiltAndroid)
+    kapt(libs.hiltAndroidCompiler)
 
-    hiltDependencies()
-    glideDependencies()
-    kotlinxCoroutinesAndroidDependencies()
-    fragmentKtxDependencies()
-    lifecycleExtensionsDependencies()
-    lifecycleRuntimeDependencies()
-    lifecycleCompiler()
-    exifInterfaceDependencies()
+    implementation(libs.glide)
+    ksp(libs.glideKsp)
 
-    androidResponsiveSizeDependencies()
-    timber()
-    ratingDialogDependencies()
-    implementation(Dependencies.retrofit)
+    implementation(libs.activityKtx)
+    implementation(libs.fragmentKtx)
+    implementation(libs.lifecycleRuntime)
+    implementation(libs.lifecycleExtensions)
+    implementation(libs.lifecycleCompiler)
+
+    implementation(libs.exifinterface)
+    implementation(libs.bundles.multiScreenDesign)
+    implementation(libs.retrofit)
+    implementation(libs.jsoup)
+    implementation(libs.timber)
+    implementation(libs.lottie)
     implementation("com.nostra13.universalimageloader:universal-image-loader:1.9.5")
-    lottieDependencies()
-
     implementation(files("libs/fingerprintidentify_1.2.6.aar"))
     implementation("com.github.zcweng:switch-button:0.0.3@aar")
     implementation("io.github.shashank02051997:FancyToast:2.0.2")

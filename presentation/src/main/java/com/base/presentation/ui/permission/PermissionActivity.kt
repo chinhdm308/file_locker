@@ -45,8 +45,10 @@ class PermissionActivity : BaseActivity<ActivityPermissionBinding>(ActivityPermi
     override fun viewListener() {
         super.viewListener()
 
+
+
         binding.buttonDonAccess.setOnClickListener {
-            finish()
+            finishAffinity()
         }
 
         binding.buttonAllow.setOnClickListener {
@@ -55,7 +57,7 @@ class PermissionActivity : BaseActivity<ActivityPermissionBinding>(ActivityPermi
     }
 
     override fun onAccessStoragePermission() = runBlocking {
-        val intent = if (dataStoreRepository.getAppFirstSettingInstanceDone()) {
+        val intent = if (dataStoreRepository.getPattern().pattern.isEmpty().not()) {
             Intent(this@PermissionActivity, PatternUnlockActivity::class.java)
         } else {
             Intent(this@PermissionActivity, PatternCreateActivity::class.java)
