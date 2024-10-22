@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
+    android:background="@color/color_appbar"
     android:minHeight="?actionBarSize">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -13,10 +13,10 @@
         android:layout_height="@dimen/_30sdp"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="@dimen/_15sdp"
-        android:background="@drawable/bg_setting_button"
+        android:background="@drawable/bg_icon_button"
         android:padding="@dimen/_5sdp"
         android:src="@drawable/ic_round_arrow_back_ios_24"
-        app:tint="#777aa1" />
+        app:tint="@color/color_tint_icon" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvTitle"
@@ -31,7 +31,7 @@
 
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="2dp"
         android:layout_gravity="bottom"
         android:visibility="invisible"
         app:dividerColor="#D9D9D9" />

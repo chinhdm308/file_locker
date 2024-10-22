@@ -10,6 +10,7 @@ import com.base.presentation.service.FileService
 import com.base.presentation.service.GroupFileService
 import com.base.domain.models.file.GroupFile
 import com.base.domain.models.file.HideFile
+import com.base.presentation.utils.AdaptiveSpacingItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
@@ -40,6 +41,7 @@ class FileHideActivity : BaseHideActivity(), BaseHideAdapter.OnListener {
     override fun initAdapter() {
         mBaseHideAdapter = FileHideAdapter(this, this)
         binding.hideViewList.adapter = mBaseHideAdapter
+        binding.hideViewList.addItemDecoration(AdaptiveSpacingItemDecoration(25))
     }
 
     /**

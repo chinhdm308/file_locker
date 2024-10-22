@@ -5,6 +5,7 @@ import com.base.presentation.base.BasePreViewActivity
 import com.base.presentation.models.AudioModelExt
 import com.base.presentation.service.AudioService
 import com.base.domain.models.audio.AudioModel
+import com.base.presentation.utils.AdaptiveSpacingItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
@@ -22,6 +23,7 @@ class AudioPreViewActivity : BasePreViewActivity() {
         mAudioPreViewAdapter = AudioPreViewAdapter(this, this, listOf())
         binding.hideViewList.apply {
             setHasFixedSize(true)
+            addItemDecoration(AdaptiveSpacingItemDecoration(25))
             adapter = mAudioPreViewAdapter
         }
 

@@ -69,6 +69,7 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":photoview"))
     implementation(project(":patternlockview"))
+    implementation(project(":ratingdialog"))
 
     implementation(libs.coreKtx)
     implementation(libs.appcompat)

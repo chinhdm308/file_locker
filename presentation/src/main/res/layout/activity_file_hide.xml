@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#6750A3"
     android:clipToPadding="false"
     android:orientation="vertical">
 
@@ -12,7 +11,7 @@
         android:id="@+id/rl_title"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/white"
+        android:background="@color/color_appbar"
         android:clipToPadding="false"
         android:fitsSystemWindows="true"
         android:gravity="center_vertical">
@@ -23,10 +22,10 @@
             android:layout_height="@dimen/_30sdp"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_15sdp"
-            android:background="@drawable/bg_setting_button"
+            android:background="@drawable/bg_icon_button"
             android:padding="@dimen/_5sdp"
             android:src="@drawable/ic_round_arrow_back_ios_24"
-            app:tint="#777aa1" />
+            app:tint="@color/color_tint_icon" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvTitle"
@@ -42,14 +41,16 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/pic_hide_btn_preview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_gravity="center"
-            android:layout_marginEnd="@dimen/_20sdp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_edit_24" />
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:background="@drawable/bg_icon_button"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/ic_edit_24"
+            app:tint="@color/color_tint_icon" />
 
         <!--Edit status-->
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -66,7 +67,7 @@
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
-                android:background="@drawable/bg_setting_button">
+                android:background="@drawable/bg_icon_button">
 
                 <androidx.appcompat.widget.AppCompatCheckBox
                     android:id="@+id/item_file_checkbox"
@@ -79,7 +80,7 @@
                     android:minWidth="0dp"
                     android:minHeight="0dp"
                     app:buttonCompat="@null"
-                    app:tint="#777aa1" />
+                    app:tint="@color/color_tint_icon" />
             </FrameLayout>
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -87,19 +88,19 @@
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
-                android:background="@drawable/bg_setting_button"
+                android:background="@drawable/bg_icon_button"
                 android:padding="@dimen/_5sdp"
                 android:src="@drawable/ic_rotate_right_24"
-                app:tint="#777aa1" />
+                app:tint="@color/color_tint_icon" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/pic_hide_img_del"
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
-                android:background="@drawable/bg_setting_button"
+                android:background="@drawable/bg_icon_button"
                 android:padding="@dimen/_5sdp"
                 android:src="@drawable/ic_delete_24"
-                app:tint="#777aa1" />
+                app:tint="@color/color_tint_icon" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </RelativeLayout>
@@ -113,8 +114,10 @@
             android:id="@+id/hide_view_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:clipToPadding="true"
             android:divider="@android:color/transparent"
             android:dividerHeight="0.1dp"
+            android:padding="10dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

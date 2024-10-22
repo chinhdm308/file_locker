@@ -7,6 +7,7 @@ import com.base.presentation.models.FileModelExt
 import com.base.presentation.service.FileService
 import com.base.presentation.utils.helper.file.FileManager
 import com.base.domain.models.file.FileModel
+import com.base.presentation.utils.AdaptiveSpacingItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
 import timber.log.Timber
@@ -40,6 +41,7 @@ class FilePreViewActivity : BasePreViewActivity(), FilePreViewAdapter.OnFolder {
     override fun initAdapter() {
         mFilePreViewAdapter = FilePreViewAdapter(this, this, listOf())
         binding.hideViewList.adapter = mFilePreViewAdapter
+        binding.hideViewList.addItemDecoration(AdaptiveSpacingItemDecoration(25))
 
         openFolder()
     }

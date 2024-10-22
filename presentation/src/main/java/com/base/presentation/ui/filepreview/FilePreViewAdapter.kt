@@ -27,6 +27,7 @@ class FilePreViewAdapter(
                 if (fileModel.getFileType() == FileModel.FILE_FILE) {
                     viewHolder.mImgPreview.setImageResource(R.drawable.file)
                 } else {
+                    viewHolder.binding.item.setBackgroundResource(0)
                     viewHolder.mImgPreview.setImageResource(R.drawable.folder)
                     viewHolder.mTvDetail.isVisible = true
                     viewHolder.mTvDetail.text = context.getString(

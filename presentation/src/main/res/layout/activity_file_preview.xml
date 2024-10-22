@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#6750A3"
     android:clipToPadding="false"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
@@ -13,9 +12,7 @@
         android:id="@+id/rl_title"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/white"
-        android:clipToPadding="false"
-        android:fitsSystemWindows="true">
+        android:background="@color/color_appbar">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivBack"
@@ -23,10 +20,10 @@
             android:layout_height="@dimen/_30sdp"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_15sdp"
-            android:background="@drawable/bg_setting_button"
+            android:background="@drawable/bg_icon_button"
             android:padding="@dimen/_5sdp"
             android:src="@drawable/ic_round_arrow_back_ios_24"
-            app:tint="#777aa1" />
+            app:tint="@color/color_tint_icon" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvTitle"
@@ -47,7 +44,7 @@
             android:layout_centerInParent="true"
             android:layout_marginEnd="@dimen/_10sdp"
             android:layout_toStartOf="@id/preview_btn_hide"
-            android:background="@drawable/bg_setting_button">
+            android:background="@drawable/bg_icon_button">
 
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/item_file_checkbox_all"
@@ -56,12 +53,11 @@
                 android:layout_gravity="center"
                 android:background="@drawable/checkbox_selector"
                 android:button="@null"
-
                 android:checked="false"
                 android:minWidth="0dp"
                 android:minHeight="0dp"
                 app:buttonCompat="@null"
-                app:tint="#777aa1" />
+                app:tint="@color/color_tint_icon" />
         </FrameLayout>
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -71,12 +67,12 @@
             android:layout_alignParentEnd="true"
             android:layout_centerInParent="true"
             android:layout_marginEnd="@dimen/_15sdp"
-            android:background="@drawable/bg_setting_button"
+            android:background="@drawable/bg_icon_button"
             android:gravity="center"
             android:padding="@dimen/_5sdp"
             android:src="@drawable/ic_done_24"
             android:text="@string/file_hide_btn"
-            app:tint="#777aa1" />
+            app:tint="@color/color_tint_icon" />
 
     </RelativeLayout>
 

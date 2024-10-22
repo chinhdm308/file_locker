@@ -5,7 +5,7 @@ import android.app.admin.DevicePolicyManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
@@ -14,8 +14,8 @@ import androidx.core.os.bundleOf
 import com.base.presentation.R
 import com.base.presentation.base.BaseActivity
 import com.base.presentation.databinding.ActivitySettingBinding
-import com.base.presentation.ui.intruders.IntrudersPhotosActivity
 import com.base.presentation.receivers.DeviceMyReceiver
+import com.base.presentation.ui.intruders.IntrudersPhotosActivity
 import com.base.presentation.ui.language.LanguageActivity
 import com.base.presentation.ui.patterncreate.PatternCreateActivity
 import com.base.presentation.utils.AppConstants
@@ -23,6 +23,7 @@ import com.base.presentation.utils.collectLifecycleFlow
 import com.base.presentation.utils.helper.CamouflageIconHelper
 import com.base.presentation.widget.dialog.singlechoice.SingleChoiceItemDialog
 import com.base.presentation.widget.dialog.singlechoice.SingleChoiceType
+import com.chinchin.ratingdialog.RatingDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -54,10 +55,8 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(ActivitySettingBind
 
 
     override fun initView(savedInstanceState: Bundle?) {
-        window.statusBarColor = getColor(R.color.white)
-        //window.navigationBarColor = Color.parseColor("#F2F2F2")
-
         super.initView(savedInstanceState)
+        window.statusBarColor = getColor(R.color.color_appbar)
 
         binding.switchFingerPrint.isChecked = viewModel.isFingerPrintEnable()
 
@@ -82,6 +81,32 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(ActivitySettingBind
 
     override fun viewListener() {
         super.viewListener()
+
+        binding.tvPolicy.setOnClickListener {
+            val url = "http://www.example.com"
+            val i = Intent(Intent.ACTION_VIEW)
+            i.setData(Uri.parse(url))
+            startActivity(i)
+        }
+
+        binding.tvRating.setOnClickListener {
+            val ratingDialog = RatingDialog(this)
+            ratingDialog.setRatingDialogListener(object : RatingDialog.RatingDialogInterFace {
+                override fun onDismiss() {
+                }
+
+                override fun onSubmit(rating: Float) {
+//                    if (rating < 4F) {
+//                        sendFeedback(rating)
+//                    } else {
+//                        rating()
+//                    }
+                }
+
+                override fun onRatingChanged(rating: Float) {}
+            })
+            ratingDialog.showDialog()
+        }
 
         binding.textChangePattern.setOnClickListener {
             val intent = Intent(this, PatternCreateActivity::class.java)

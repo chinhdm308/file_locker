@@ -7,6 +7,7 @@ import android.widget.MediaController
 import android.widget.VideoView
 import androidx.core.view.isVisible
 import androidx.viewpager.widget.PagerAdapter
+import com.base.presentation.R
 import com.base.presentation.base.BaseActivity
 import com.base.presentation.databinding.ActivityPlayVideoPreViewBinding
 
@@ -16,6 +17,7 @@ class PlayVideoPreViewActivity : BaseActivity<ActivityPlayVideoPreViewBinding>(A
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
+        window.statusBarColor = getColor(R.color.color_appbar)
 
         mSamplePagerAdapter = SamplePagerAdapter(listOf())
 

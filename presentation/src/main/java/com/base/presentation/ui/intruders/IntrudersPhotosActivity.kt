@@ -26,8 +26,8 @@ class IntrudersPhotosActivity :
     }
 
     override fun initView(savedInstanceState: Bundle?) {
-        window.statusBarColor = getColor(R.color.color_toolbar_hide_file)
         super.initView(savedInstanceState)
+        window.statusBarColor = getColor(R.color.color_appbar)
 
         binding.recyclerViewIntrudersPhotosList.adapter = intrudersListAdapter
 

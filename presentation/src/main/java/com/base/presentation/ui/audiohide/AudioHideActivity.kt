@@ -10,6 +10,7 @@ import com.base.presentation.service.AudioService
 import com.base.presentation.service.GroupAudioService
 import com.base.domain.models.audio.GroupAudio
 import com.base.domain.models.audio.HideAudio
+import com.base.presentation.utils.AdaptiveSpacingItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
@@ -39,6 +40,7 @@ class AudioHideActivity : BaseHideActivity(), BaseHideAdapter.OnListener {
     override fun initAdapter() {
         mBaseHideAdapter = AudioHideAdapter(this, this)
         binding.hideViewList.adapter = mBaseHideAdapter
+        binding.hideViewList.addItemDecoration(AdaptiveSpacingItemDecoration(25))
     }
 
     @Suppress("UNCHECKED_CAST")

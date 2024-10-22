@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/round_background"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
@@ -18,8 +22,9 @@
             android:layout_width="72dp"
             android:layout_height="72dp"
             android:contentDescription="@string/app_name"
-            android:padding="16dp"
-            android:scaleType="fitCenter" />
+            android:padding="10dp"
+            android:scaleType="fitCenter"
+            tools:src="@drawable/box_file" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -29,41 +34,50 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_marginEnd="20dp"
+                android:layout_toStartOf="@+id/item_file_checkbox"
                 android:gravity="center_vertical|start"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/pre_preView_txt"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="32dp"
                     android:ellipsize="end"
                     android:gravity="start"
                     android:maxLines="1"
                     android:textColor="@color/md_black_0"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    tools:text="File name" />
 
                 <TextView
                     android:id="@+id/tv_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="32dp"
                     android:ellipsize="end"
                     android:gravity="start"
                     android:maxLines="1"
                     android:textColor="@color/md_black_2"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    tools:text="1000MB" />
             </LinearLayout>
 
-            <com.google.android.material.checkbox.MaterialCheckBox
+            <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/item_file_checkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerInParent="true"
-                android:layout_marginEnd="0dp"
-                android:checked="true"
-                android:clickable="false" />
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/checkbox_selector"
+                android:button="@null"
+                android:checked="false"
+                android:clickable="false"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                app:buttonCompat="@null"
+                app:tint="#777aa1" />
 
             <View
                 android:layout_width="match_parent"

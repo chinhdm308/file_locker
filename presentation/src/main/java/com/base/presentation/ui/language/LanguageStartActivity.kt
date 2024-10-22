@@ -9,6 +9,7 @@ import android.os.Environment
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.base.data.local.datastore.DataStoreRepository
+import com.base.presentation.R
 import com.base.presentation.base.BaseActivity
 import com.base.presentation.databinding.ActivityLanguageStartBinding
 import com.base.presentation.ui.language.adapter.LanguageAdapter
@@ -35,6 +36,7 @@ class LanguageStartActivity : BaseActivity<ActivityLanguageStartBinding>(Activit
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
+        window.statusBarColor = getColor(R.color.color_appbar)
 
         initData()
 

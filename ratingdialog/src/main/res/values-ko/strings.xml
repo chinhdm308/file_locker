@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="rate_now">지금 평가하세요!</string>
+    <string name="rating_for_me">저를 위한 평가!</string>
+    <string name="do_you_love_this_app">이 앱을 좋아하세요?</string>
+</resources>

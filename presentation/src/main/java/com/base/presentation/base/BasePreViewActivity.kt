@@ -16,8 +16,8 @@ abstract class BasePreViewActivity : BaseActivity<ActivityFilePreviewBinding>(Ac
     protected var mBeyondGroupId: Long = 0
 
     override fun initView(savedInstanceState: Bundle?) {
-        window.statusBarColor = getColor(R.color.white)
         super.initView(savedInstanceState)
+        window.statusBarColor = getColor(R.color.color_appbar)
 
         initUI()
         initAdapter()

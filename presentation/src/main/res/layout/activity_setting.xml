@@ -133,6 +133,7 @@
                     android:text="@string/language" />
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvRating"
                     style="@style/TitleItemSettingStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -145,6 +146,7 @@
                     android:text="@string/rating" />
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvPolicy"
                     style="@style/TitleItemSettingStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -353,7 +355,7 @@
                         android:id="@+id/imgCamouflageIcon"
                         android:layout_width="@dimen/_40sdp"
                         android:layout_height="@dimen/_40sdp"
-                        android:background="@drawable/bg_setting_button"
+                        android:background="@drawable/bg_icon_button"
                         android:contentDescription="@string/app_name"
                         android:scaleType="fitXY"
                         app:shapeAppearanceOverlay="@style/RoundedImageView"

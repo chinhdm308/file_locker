@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="rate_now">今すぐ評価する！</string>
+    <string name="rating_for_me">私への評価！</string>
+    <string name="do_you_love_this_app">このアプリが好きですか？</string>
+</resources>

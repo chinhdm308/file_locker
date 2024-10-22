@@ -38,8 +38,8 @@ abstract class BaseHideActivity :
     protected var mBaseHideAdapter: BaseHideAdapter? = null
 
     override fun initView(savedInstanceState: Bundle?) {
-        window.statusBarColor = getColor(R.color.white)
         super.initView(savedInstanceState)
+        window.statusBarColor = getColor(R.color.color_appbar)
 
         initUI()
         initAdapter()

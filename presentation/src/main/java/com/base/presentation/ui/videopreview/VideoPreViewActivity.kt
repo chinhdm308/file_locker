@@ -5,6 +5,7 @@ import com.base.presentation.base.BasePreViewActivity
 import com.base.presentation.models.VideoModelExt
 import com.base.presentation.service.VideoService
 import com.base.domain.models.video.VideoModel
+import com.base.presentation.utils.AdaptiveSpacingItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
@@ -21,6 +22,7 @@ class VideoPreViewActivity : BasePreViewActivity() {
         mVideoPreViewAdapter = VideoPreViewAdapter(this, this, listOf())
         binding.hideViewList.apply {
             setHasFixedSize(true)
+            addItemDecoration(AdaptiveSpacingItemDecoration(25))
             adapter = mVideoPreViewAdapter
         }
 

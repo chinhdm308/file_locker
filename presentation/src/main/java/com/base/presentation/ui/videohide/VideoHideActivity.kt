@@ -10,6 +10,7 @@ import com.base.presentation.service.GroupVideoService
 import com.base.presentation.service.VideoService
 import com.base.domain.models.video.GroupVideo
 import com.base.domain.models.video.HideVideo
+import com.base.presentation.utils.AdaptiveSpacingItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
@@ -38,6 +39,7 @@ class VideoHideActivity : BaseHideActivity(), BaseHideAdapter.OnListener {
 
     override fun initAdapter() {
         mBaseHideAdapter = VideoHideAdapter(this, this)
+        binding.hideViewList.addItemDecoration(AdaptiveSpacingItemDecoration(25))
         binding.hideViewList.adapter = mBaseHideAdapter
     }
 
